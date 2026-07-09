@@ -20,14 +20,21 @@ echo "=== 3/5  Tag and push ==="
 docker tag ${IMAGE}:latest ${REGISTRY}/${IMAGE_REPO}/${IMAGE}:latest
 docker push ${REGISTRY}/${IMAGE_REPO}/${IMAGE}:latest
 
-echo "=== 4/5  Update service spec + restart ==="
+echo "=== 4/5  Update service spec with pinned digest + restart ==="
+# Get the exact amd64 digest from the registry
+DIGEST=$(docker manifest inspect ${REGISTRY}/${IMAGE_REPO}/${IMAGE}:latest 2>/dev/null \
+  | python3 -c "import sys,json; m=json.load(sys.stdin); print(next(x['digest'] for x in m['manifests'] if x['platform']['architecture']=='amd64'))")
+echo "  Using digest: $DIGEST"
+
+env -u "SNOWFLAKE_CONNECTIONS_SFCOGSOPS-SNOWHOUSE_AWS_US_WEST_2_SESSION_TOKEN" \
+    -u "SNOWFLAKE_CONNECTIONS_SFCOGSOPS-SNOWHOUSE_AWS_US_WEST_2_MASTER_TOKEN" \
 snow sql -c "$CONN" -q "
   USE ROLE TECHNICAL_ACCOUNT_MANAGER;
   ALTER SERVICE TEMP.MMARZILLO_COCO.COCO_PRESENTATION_SERVICE FROM SPECIFICATION \$\$
 spec:
   containers:
     - name: web
-      image: ${REGISTRY}/${IMAGE_REPO}/${IMAGE}:latest
+      image: ${REGISTRY}/${IMAGE_REPO}/${IMAGE}@${DIGEST}
       resources:
         limits:
           memory: 512M
