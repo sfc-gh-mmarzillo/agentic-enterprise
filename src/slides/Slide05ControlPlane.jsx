@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { Logo } from './logos'
 
 // Step 0: classic Snowflake arch
-// Step 1: AI Data Cloud
+// Step 1: AI Data Cloud  (click → zooms into AI box → step 2)
 // Step 2: Agentic Control Plane (original 5-layer table)
 
 const ROWS = [
@@ -14,18 +15,32 @@ const ROWS = [
 ]
 
 const STEPS_META = [
-  { label: 'The Data Platform',        sublabel: 'Centralized storage · Multi-cluster compute · Cloud services' },
-  { label: 'The AI Data Cloud',        sublabel: 'Every data & AI workload on one platform' },
-  { label: 'The Agentic Control Plane',sublabel: 'Easy · Connected · Trusted' },
+  { label: 'The Data Platform',         sublabel: 'Centralized storage · Multi-cluster compute · Cloud services' },
+  { label: 'The AI Data Cloud',         sublabel: 'Every data & AI workload on one platform' },
+  { label: 'The Agentic Control Plane', sublabel: 'Easy · Connected · Trusted' },
 ]
 
 export default function Slide05ControlPlane() {
   const [step, setStep] = useState(0)
-  const advance = () => setStep((s) => (s + 1) % 3)
+  const [zooming, setZooming] = useState(false)
+
+  const advance = () => {
+    if (zooming) return
+    if (step === 1) {
+      setZooming(true) // triggers zoom animation; step changes in onAnimationComplete
+    } else {
+      setStep((s) => (s + 1) % 3)
+    }
+  }
+
   const { label, sublabel } = STEPS_META[step]
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center" onClick={advance} style={{ cursor: 'pointer' }}>
+    <div
+      className="flex h-full w-full flex-col items-center justify-center"
+      onClick={advance}
+      style={{ cursor: zooming ? 'default' : 'pointer' }}
+    >
       {/* header */}
       <div className="text-center mb-4 select-none">
         <p className="text-[12px] font-semibold uppercase tracking-[0.24em] text-sf-blue">Platform Architecture</p>
@@ -35,25 +50,57 @@ export default function Slide05ControlPlane() {
 
       {/* step 0 — classic arch */}
       {step === 0 && (
-        <img
+        <motion.img
+          key="classic"
           src="/slides/snowflake-arch-classic.png"
           alt="Classic Snowflake Architecture"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
           style={{ maxWidth: '82%', maxHeight: '460px', objectFit: 'contain', display: 'block' }}
         />
       )}
 
-      {/* step 1 — AI Data Cloud */}
+      {/* step 1 — AI Data Cloud, with zoom-into-AI-box transition */}
       {step === 1 && (
-        <img
+        <motion.img
+          key="aicloud"
           src="/slides/ai-data-cloud.png"
           alt="Snowflake AI Data Cloud"
-          style={{ maxWidth: '100%', maxHeight: '480px', objectFit: 'contain', display: 'block' }}
+          initial={{ opacity: 0, scale: 1 }}
+          animate={zooming
+            ? { opacity: 0, scale: 10 }
+            : { opacity: 1, scale: 1 }
+          }
+          transition={zooming
+            ? { duration: 0.65, ease: [0.4, 0, 1, 1] }
+            : { duration: 0.4 }
+          }
+          style={{
+            maxWidth: '100%',
+            maxHeight: '480px',
+            objectFit: 'contain',
+            display: 'block',
+            transformOrigin: '63% 70%', // center of the "AI" box in the image
+          }}
+          onAnimationComplete={() => {
+            if (zooming) {
+              setStep(2)
+              setZooming(false)
+            }
+          }}
         />
       )}
 
       {/* step 2 — Agentic Control Plane table */}
       {step === 2 && (
-        <div className="w-full max-w-[960px] rounded-2xl border border-emerald-200/70 bg-white/70 p-4">
+        <motion.div
+          key="controlplane"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.45, delay: 0.05 }}
+          className="w-full max-w-[960px] rounded-2xl border border-emerald-200/70 bg-white/70 p-4"
+        >
           <p className="mb-3 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-sf-teal">
             Agentic Control Plane &mdash; Security · Governance · Identity · FinOps
           </p>
@@ -76,7 +123,7 @@ export default function Slide05ControlPlane() {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       )}
 
       {/* step dots + hint */}
@@ -85,7 +132,7 @@ export default function Slide05ControlPlane() {
           {[0, 1, 2].map((i) => (
             <span
               key={i}
-              onClick={(e) => { e.stopPropagation(); setStep(i) }}
+              onClick={(e) => { e.stopPropagation(); if (!zooming) setStep(i) }}
               className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${i === step ? 'w-6 bg-sf-blue' : 'w-2 bg-sf-line'}`}
             />
           ))}
