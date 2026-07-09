@@ -41,6 +41,7 @@ jobs:
           password = "${{ secrets.SNOWFLAKE_PASSWORD }}"
           authenticator = "snowflake"
           EOF
+          chmod 0600 ~/.snowflake/connections.toml
 
       - name: Login to Snowflake image registry
         run: snow spcs image-registry login --connection snowhouse
