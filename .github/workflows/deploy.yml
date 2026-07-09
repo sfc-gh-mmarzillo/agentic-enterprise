@@ -32,15 +32,13 @@ jobs:
         run: pip install snowflake-cli-labs
 
       - name: Configure Snowflake connection
+        env:
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
         run: |
           mkdir -p ~/.snowflake
-          cat > ~/.snowflake/connections.toml <<EOF
-          [snowhouse]
-          account = "${{ env.SNOWFLAKE_ACCOUNT }}"
-          user = "${{ env.SNOWFLAKE_USER }}"
-          password = "${{ secrets.SNOWFLAKE_PASSWORD }}"
-          authenticator = "snowflake"
-          EOF
+          printf '[snowhouse]\naccount = "%s"\nuser = "%s"\npassword = "%s"\nauthenticator = "snowflake"\n' \
+            "$SNOWFLAKE_ACCOUNT" "$SNOWFLAKE_USER" "$SNOWFLAKE_PASSWORD" \
+            > ~/.snowflake/connections.toml
           chmod 0600 ~/.snowflake/connections.toml
 
       - name: Login to Snowflake image registry
