@@ -1,112 +1,113 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
+// type: 'ml' | 'agent' | 'app'
 const SCENARIOS = [
   {
-    key: 'Financial Services', row: 'industry',
+    key: 'Financial Services', row: 'industry', type: 'ml',
     usecase: 'Risk & Compliance Intelligence',
     sources: ['Bloomberg', 'Salesforce', 'Customer360'],
     processing: ['Scanning counterparty exposure...', 'Correlating market sentiment signals', 'Scoring portfolio risk positions'],
-    ml: { title: 'Credit Risk Model', steps: ['Loading 90-day market features...', 'Retraining gradient-boosted model', 'Validating against hold-out set → AUC 0.94'] },
+    solution: { title: 'Credit Risk Model', steps: ['Loading 90-day market features...', 'Retraining gradient-boosted model', 'Validating against hold-out set → AUC 0.94'] },
     action: { do: 'Flagging 3 at-risk positions to compliance team', win: 'Proactive risk mitigation before market close' },
     progress: 0,
     quote: ['Capital One', 'Snowflake enables us to run ML at petabyte scale, serving our risk and fraud models in near real time.'],
   },
   {
-    key: 'Insurance', row: 'industry',
+    key: 'Insurance', row: 'industry', type: 'ml',
     usecase: 'Automated Claims & Fraud Detection',
     sources: ['Claims DB', 'Weather API', 'Policyholder CRM'],
     processing: ['Ingesting new claims batch (1,247)...', 'Correlating with weather event patterns', 'Flagging anomalous claim clusters'],
-    ml: { title: 'Fraud Probability Scorer', steps: ['Enriching claims with geo + weather data...', 'Running fraud detection ensemble', 'Scoring complete → 23 flagged for review'] },
+    solution: { title: 'Fraud Probability Scorer', steps: ['Enriching claims with geo + weather data...', 'Running fraud detection ensemble', 'Scoring complete → 23 flagged for review'] },
     action: { do: 'Auto-routing 1,224 clean claims; escalating 23 to SIU', win: '70% faster claims processing, reduced fraud loss' },
     progress: 0,
     quote: ['Zurich Insurance', 'Snowflake allows us to be more precise in our pricing while keeping underwriters in control.'],
   },
   {
-    key: 'HCLS', row: 'industry',
+    key: 'HCLS', row: 'industry', type: 'agent',
     usecase: 'Patient Risk & Clinical Intelligence',
     sources: ['EHR System', 'Claims Data', 'Clinical Trials'],
     processing: ['Matching patient cohorts to protocols...', 'Analyzing treatment outcome patterns', 'Detecting adverse event signals'],
-    ml: { title: 'Patient Risk Stratifier', steps: ['Building features from longitudinal EHR...', 'Training readmission risk model', 'Validating against outcomes → AUC 0.91'] },
-    action: { do: 'Flagging 12 high-risk patients for care coordinator review', win: '28% reduction in unplanned readmissions' },
+    solution: { title: 'Clinical CoWork Agent', steps: ['Scanning EHR for at-risk signals...', 'Surfacing care gaps per patient cohort', 'Drafting coordinator briefings for review'] },
+    action: { do: 'CoWork flags 12 high-risk patients, drafts care plans', win: '28% reduction in unplanned readmissions' },
     progress: 2,
     quote: ['Bupa', 'Snowflake gives us the ability to connect patients to the right treatments faster than ever before.'],
   },
   {
-    key: 'Travel', row: 'industry',
-    usecase: 'Dynamic Pricing & Personalisation',
+    key: 'Travel', row: 'industry', type: 'app',
+    usecase: 'Dynamic Pricing Dashboard',
     sources: ['Booking Engine', 'Loyalty DB', 'Pricing API'],
     processing: ['Pulling 30-day booking velocity...', 'Analyzing route demand elasticity', 'Computing competitor fare deltas'],
-    ml: { title: 'Dynamic Pricing Model', steps: ['Building elasticity curves per route...', 'Optimizing yield with demand forecast', 'Generating pricing recommendations'] },
-    action: { do: 'Adjusting 14 route pricing tiers, notifying RM team', win: '3-5% yield improvement per route per quarter' },
+    solution: { title: 'Streamlit Pricing App', steps: ['Loading real-time demand data into app...', 'Rendering elasticity curves per route', 'Surfacing pricing recommendations via UI'] },
+    action: { do: 'Revenue managers adjust 14 route tiers via app', win: '3-5% yield improvement per route per quarter' },
     progress: 2,
     quote: ['Travel Client (via Tredence)', 'NPS +7 points, avg member value +$500 via personalization'],
   },
   {
-    key: 'Telecomms', row: 'industry',
+    key: 'Telecomms', row: 'industry', type: 'ml',
     usecase: 'Churn Prevention & Retention',
     sources: ['Network Logs', 'CRM', 'Usage DB'],
     processing: ['Streaming usage pattern changes...', 'Detecting engagement drop signals', 'Cross-referencing support tickets'],
-    ml: { title: 'Churn Propensity Model', steps: ['Feature engineering on 90-day behavior...', 'Training survival model with tenure features', 'Scoring base → 842 high-risk subscribers'] },
+    solution: { title: 'Churn Propensity Model', steps: ['Feature engineering on 90-day behavior...', 'Training survival model with tenure features', 'Scoring base → 842 high-risk subscribers'] },
     action: { do: 'Triggering retention offers via preferred channel', win: '22% reduction in high-value churn' },
     progress: 2,
     quote: ['AT&T', 'We achieved 84% annual cost savings and dramatically accelerated our time to insight.'],
   },
   {
-    key: 'Retail', row: 'industry',
-    usecase: 'Inventory & Demand Forecasting',
+    key: 'Retail', row: 'industry', type: 'app',
+    usecase: 'Inventory & Demand Analytics',
     sources: ['POS System', 'Inventory', 'Supplier Portal'],
     processing: ['Analyzing real-time sales velocity...', 'Predicting stock-out risk by SKU', 'Checking supplier lead times'],
-    ml: { title: 'Demand Forecast Model', steps: ['Retraining on latest 14-day sales...', 'Factoring seasonality + promotions', 'Generating reorder recommendations'] },
-    action: { do: 'Auto-reordering 38 SKUs, alerting merchandising team', win: '40% reduction in lost sales from stock-outs' },
+    solution: { title: 'React Inventory App', steps: ['Fetching live SKU data into React dashboard...', 'Rendering demand heatmaps by region', 'Showing reorder alerts in-app to buyers'] },
+    action: { do: 'Buyers action 38 reorder alerts directly in the app', win: '40% reduction in lost sales from stock-outs' },
     progress: 2,
     quote: ['ABB', 'Snowflake brought together 40 ERP systems — unlocking roughly $200M in annual inventory savings.'],
   },
   {
-    key: 'Logistics', row: 'industry',
+    key: 'Logistics', row: 'industry', type: 'ml',
     usecase: 'Fleet & Freight Optimization',
     sources: ['Telematics / ELD', 'TMS & Load Board', 'Fuel & Weather API'],
     processing: ['Streaming 12,400 vehicle GPS pings...', 'Detecting route delay & idle patterns', 'Matching load demand to fleet capacity'],
-    ml: { title: 'Route & ETA Optimizer', steps: ['Building features from telematics + traffic...', 'Optimizing multi-stop routes vs. demand forecast', 'Scoring lanes → 96% on-time ETA confidence'] },
+    solution: { title: 'Route & ETA Optimizer', steps: ['Building features from telematics + traffic...', 'Optimizing multi-stop routes vs. demand forecast', 'Scoring lanes → 96% on-time ETA confidence'] },
     action: { do: 'Rerouting 47 loads, dispatching drivers, flagging 6 trucks for maintenance', win: '11% fewer empty miles, 8% fuel savings, higher on-time delivery' },
     progress: 2,
-    quote: ['Schneider National', 'Snowflake gives us one source of truth across fleet and freight data — powering smarter, faster dispatch and pricing decisions.'],
+    quote: ['Schneider National', 'Snowflake gives us one source of truth across fleet and freight data.'],
   },
   {
-    key: 'Finance', row: 'lob',
+    key: 'Finance', row: 'lob', type: 'agent',
     usecase: 'Close Automation & Variance Analysis',
     sources: ['ERP', 'Banking Feeds', 'General Ledger'],
     processing: ['Pulling daily transaction feeds...', 'Matching GL entries across entities', 'Detecting unreconciled variances'],
-    ml: { title: 'Forecast Variance Model', steps: ['Computing rolling actuals vs. plan...', 'Identifying systematic drift patterns', 'Generating correction recommendations'] },
-    action: { do: 'Drafting 4 journal entry corrections for review', win: '5-day faster close, 90% fewer manual reconciliations' },
+    solution: { title: 'CoWork Finance Agent', steps: ['Agent queries ERP and GL autonomously...', 'Identifies variance root causes', 'Drafts journal corrections for CFO approval'] },
+    action: { do: 'CFO reviews & approves 4 corrections via CoWork', win: '5-day faster close, 90% fewer manual reconciliations' },
     progress: 1,
     quote: ['ABB', 'Millions in savings from unified ERP data'],
   },
   {
-    key: 'Marketing', row: 'lob',
+    key: 'Marketing', row: 'lob', type: 'app',
     usecase: 'Multi-Touch Attribution & Optimisation',
     sources: ['Ad Platforms', 'CRM', 'Web Analytics'],
     processing: ['Aggregating multi-channel spend...', 'Computing multi-touch attribution', 'Scoring campaign performance'],
-    ml: { title: 'Campaign Optimizer', steps: ['Segmenting audiences by LTV...', 'Modeling channel interaction effects', 'Recommending budget reallocation'] },
-    action: { do: 'Reallocating $42K to top performers, pausing 3 campaigns', win: '18% improvement in CAC efficiency' },
+    solution: { title: 'Attribution Streamlit App', steps: ['Loading spend vs. conversion data into app...', 'Rendering attribution waterfall chart', 'Surfacing reallocation recommendations'] },
+    action: { do: 'Marketer reallocates $42K directly from the app', win: '18% improvement in CAC efficiency' },
     progress: 0,
     quote: ['Digital Virgo', 'Snowflake cut our data latency by 90% and eliminated silos across 40+ markets.'],
   },
   {
-    key: 'Sales', row: 'lob',
+    key: 'Sales', row: 'lob', type: 'agent',
     usecase: 'Pipeline Intelligence & Rep Productivity',
     sources: ['CRM', 'Email', 'Call Transcripts'],
     processing: ['Analyzing deal engagement signals...', 'Computing pipeline velocity metrics', 'Detecting stalled opportunities'],
-    ml: { title: 'Win Probability Model', steps: ['Extracting sentiment from calls...', 'Scoring deals on engagement recency', 'Ranking pipeline by close likelihood'] },
-    action: { do: 'Prioritizing 8 deals for outreach, drafting follow-ups', win: '15% uplift in conversion rate, 2x rep productivity' },
+    solution: { title: 'CoWork Sales Agent', steps: ['Agent scans deals for churn signals...', 'Scores pipeline by close likelihood', 'Drafts follow-up outreach for rep review'] },
+    action: { do: 'Rep reviews CoWork-drafted follow-ups, approves 8', win: '15% uplift in conversion rate, 2x rep productivity' },
     progress: 1,
     quote: ['Snowflake', '25% higher engagement, 2x conversion with propensity scoring'],
   },
   {
-    key: 'HR', row: 'lob',
+    key: 'HR', row: 'lob', type: 'ml',
     usecase: 'Workforce Analytics & Retention',
     sources: ['HRIS', 'Pulse Surveys', 'Perf Reviews'],
     processing: ['Analyzing engagement survey trends...', 'Correlating with tenure + performance', 'Detecting early flight risk signals'],
-    ml: { title: 'Flight Risk Model', steps: ['Building features from HR signals...', 'Training attrition predictor', 'Scoring workforce → 14 high-risk flagged'] },
+    solution: { title: 'Flight Risk Model', steps: ['Building features from HR signals...', 'Training attrition predictor', 'Scoring workforce → 14 high-risk flagged'] },
     action: { do: 'Triggering retention workflow, alerting skip-level manager', win: '30% reduction in regrettable attrition' },
     progress: 1,
     quote: ['SD Worx', 'We surface daily workforce insights on anomalies and absenteeism across our entire customer base.'],
@@ -116,6 +117,12 @@ const SCENARIOS = [
 const INDUSTRY = SCENARIOS.filter((s) => s.row === 'industry')
 const LOB = SCENARIOS.filter((s) => s.row === 'lob')
 const CODE_STEPS = ['Building pipeline...', 'Identifying patterns...', 'Actioning insights...']
+
+const TYPE_META = {
+  ml:    { col: 'Agentic ML',       dot: 'bg-sf-purple', badge: 'bg-sf-purple/8 text-sf-purple' },
+  agent: { col: 'CoWork Agent',     dot: 'bg-sf-blue',   badge: 'bg-sf-blue/8 text-sf-blue' },
+  app:   { col: 'AI-Powered App',   dot: 'bg-sf-teal',   badge: 'bg-sf-teal/8 text-sf-teal' },
+}
 
 const COCO_GRID = [
   '...BBBBB...',
@@ -151,12 +158,9 @@ function CortexCodeLogo() {
 
 export default function Slide04Industries() {
   const [idx, setIdx] = useState(0)
-  useEffect(() => {
-    const t = setInterval(() => setIdx((i) => (i + 1) % SCENARIOS.length), 4200)
-    return () => clearInterval(t)
-  }, [])
   const d = SCENARIOS[idx]
   const select = (key) => setIdx(SCENARIOS.findIndex((s) => s.key === key))
+  const meta = TYPE_META[d.type]
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center py-2">
@@ -202,11 +206,11 @@ export default function Slide04Industries() {
           <p className="font-mono text-[10.5px] text-sf-green">✓ Complete</p>
         </Col>
         <Arrow />
-        <Col title="Agentic ML">
-          <div className="mb-1 flex items-center gap-1.5 rounded-md bg-sf-purple/8 px-2 py-1 text-[11px] font-medium text-sf-ink">
-            <span className="h-1.5 w-1.5 rounded-full bg-sf-purple" />{d.ml.title}
+        <Col title={meta.col}>
+          <div className={`mb-1 flex items-center gap-1.5 rounded-md px-2 py-1 text-[11px] font-medium text-sf-ink ${meta.badge}`}>
+            <span className={`h-1.5 w-1.5 rounded-full ${meta.dot}`} />{d.solution.title}
           </div>
-          {d.ml.steps.map((s, i) => (
+          {d.solution.steps.map((s, i) => (
             <p key={i} className="font-mono text-[10.5px] leading-snug text-sf-slate"><span className="text-sf-mist">[{i + 1}]</span> {s}</p>
           ))}
         </Col>

@@ -92,7 +92,6 @@ export default function Slide10Secure() {
   return (
     <div className="flex h-full w-full flex-col pt-1">
       <div className="text-center">
-        <p className="text-[12px] font-semibold uppercase tracking-[0.24em] text-sf-teal">AI Security</p>
         <h2 className="mt-1 text-[38px] font-extrabold tracking-tight text-sf-navy">Secure by default.</h2>
         <p className="mt-1 text-[13px] text-sf-mist">Proactive enterprise-grade security for data and AI — built-in, not bolted on.</p>
       </div>

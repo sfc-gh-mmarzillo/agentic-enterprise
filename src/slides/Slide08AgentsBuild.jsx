@@ -41,7 +41,9 @@ export default function Slide08AgentsBuild() {
         {/* left */}
         <div className="rounded-2xl border border-sf-line bg-white/70 p-5">
           <div className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-sf-purple/10 text-sf-purple">🤖</span>
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-sf-purple/10 p-0.5">
+              <img src="/logos/coco-owl.png" alt="Cortex Code" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'contain', imageRendering: 'pixelated' }} />
+            </span>
             <div>
               <p className="text-[15px] font-bold text-sf-purple">Cortex Code</p>
               <p className="text-[11px] text-sf-mist">The AI Coding Agent, for Data</p>
