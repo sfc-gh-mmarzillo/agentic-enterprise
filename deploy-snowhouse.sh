@@ -20,11 +20,26 @@ echo "=== 3/5  Tag and push ==="
 docker tag ${IMAGE}:latest ${REGISTRY}/${IMAGE_REPO}/${IMAGE}:latest
 docker push ${REGISTRY}/${IMAGE_REPO}/${IMAGE}:latest
 
-echo "=== 4/5  Restart service ==="
+echo "=== 4/5  Update service spec + restart ==="
 snow sql -c "$CONN" -q "
   USE ROLE TECHNICAL_ACCOUNT_MANAGER;
-  ALTER SERVICE TEMP.MMARZILLO_COCO.COCO_PRESENTATION_SERVICE SUSPEND;
-  ALTER SERVICE TEMP.MMARZILLO_COCO.COCO_PRESENTATION_SERVICE RESUME;
+  ALTER SERVICE TEMP.MMARZILLO_COCO.COCO_PRESENTATION_SERVICE FROM SPECIFICATION \$\$
+spec:
+  containers:
+    - name: web
+      image: ${REGISTRY}/${IMAGE_REPO}/${IMAGE}:latest
+      resources:
+        limits:
+          memory: 512M
+          cpu: '1'
+        requests:
+          memory: 256M
+          cpu: '0.5'
+  endpoints:
+    - name: web
+      port: 8080
+      public: true
+\$\$;
 "
 
 echo "=== 5/5  Endpoint URL ==="
