@@ -1,0 +1,94 @@
+name: Build & Deploy to Snowhouse SPCS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  SNOWFLAKE_ACCOUNT: SFCOGSOPS-SNOWHOUSE_AWS_US_WEST_2
+  SNOWFLAKE_USER: MMARZILLO
+  REGISTRY: sfcogsops-snowhouse-aws-us-west-2.registry.snowflakecomputing.com
+  IMAGE_REPO: user_mmarzillo/presentation_app/images
+  IMAGE_NAME: coco-presentation
+  DB: '"USER$MMARZILLO"'
+  SCHEMA: PRESENTATION_APP
+  SERVICE: COCO_PRESENTATION_SERVICE
+  COMPUTE_POOL: SYSTEM_COMPUTE_POOL_CPU
+
+jobs:
+  deploy:
+    name: Build, Push & Restart
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Install Snowflake CLI
+        run: pip install snowflake-cli-labs
+
+      - name: Configure Snowflake connection
+        run: |
+          mkdir -p ~/.snowflake
+          cat > ~/.snowflake/connections.toml <<EOF
+          [snowhouse]
+          account = "${{ env.SNOWFLAKE_ACCOUNT }}"
+          user = "${{ env.SNOWFLAKE_USER }}"
+          password = "${{ secrets.SNOWFLAKE_PASSWORD }}"
+          authenticator = "snowflake"
+          EOF
+
+      - name: Login to Snowflake image registry
+        run: snow spcs image-registry login --connection snowhouse
+
+      - name: Build & push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}:latest
+
+      - name: Ensure image repo & service exist, then restart
+        run: |
+          snow sql -c snowhouse -q "
+            USE DATABASE ${{ env.DB }};
+            CREATE SCHEMA IF NOT EXISTS ${{ env.SCHEMA }};
+            CREATE IMAGE REPOSITORY IF NOT EXISTS ${{ env.SCHEMA }}.IMAGES;
+
+            CREATE SERVICE IF NOT EXISTS ${{ env.SCHEMA }}.${{ env.SERVICE }}
+              IN COMPUTE POOL ${{ env.COMPUTE_POOL }}
+              FROM SPECIFICATION \$\$
+            spec:
+              containers:
+                - name: web
+                  image: /${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }}:latest
+                  resources:
+                    requests:
+                      memory: 256M
+                      cpu: 0.5
+                    limits:
+                      memory: 512M
+                      cpu: 1
+              endpoints:
+                - name: web
+                  port: 8080
+                  public: true
+            \$\$
+              MIN_INSTANCES = 1
+              MAX_INSTANCES = 1;
+
+            ALTER SERVICE ${{ env.SCHEMA }}.${{ env.SERVICE }} SUSPEND;
+            ALTER SERVICE ${{ env.SCHEMA }}.${{ env.SERVICE }} RESUME;
+            GRANT USAGE ON SERVICE ${{ env.SCHEMA }}.${{ env.SERVICE }} TO ROLE PUBLIC;
+          "
+
+      - name: Print endpoint URL
+        run: |
+          snow sql -c snowhouse -q "
+            SHOW ENDPOINTS IN SERVICE ${{ env.DB }}.${{ env.SCHEMA }}.${{ env.SERVICE }};
+          "
