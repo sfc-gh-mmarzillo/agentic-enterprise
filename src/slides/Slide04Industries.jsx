@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // type: 'ml' | 'agent' | 'app'
 const SCENARIOS = [
@@ -158,6 +158,10 @@ function CortexCodeLogo() {
 
 export default function Slide04Industries() {
   const [idx, setIdx] = useState(0)
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % SCENARIOS.length), 5000)
+    return () => clearInterval(t)
+  }, [])
   const d = SCENARIOS[idx]
   const select = (key) => setIdx(SCENARIOS.findIndex((s) => s.key === key))
   const meta = TYPE_META[d.type]

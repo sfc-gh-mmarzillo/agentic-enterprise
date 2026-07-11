@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Logo } from './logos'
 
@@ -27,11 +27,31 @@ export default function Slide05ControlPlane() {
   const advance = () => {
     if (zooming) return
     if (step === 1) {
-      setZooming(true) // triggers zoom animation; step changes in onAnimationComplete
+      setZooming(true)
     } else {
       setStep((s) => (s + 1) % 3)
     }
   }
+
+  // Intercept right-arrow / space / PageDown so a clicker advances the step
+  // instead of navigating to the next slide. Left-arrow goes back within steps.
+  useEffect(() => {
+    const onKey = (e) => {
+      const fwd = e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown'
+      const back = e.key === 'ArrowLeft' || e.key === 'PageUp'
+      if (fwd && !zooming) {
+        if (step < 2) { e.stopImmediatePropagation(); advance() }
+        // step === 2: let it propagate so App.jsx navigates to next slide
+      }
+      if (back && !zooming && step > 0) {
+        e.stopImmediatePropagation()
+        setStep((s) => s - 1)
+      }
+    }
+    // Capture phase so we intercept before App.jsx's bubble-phase listener
+    window.addEventListener('keydown', onKey, true)
+    return () => window.removeEventListener('keydown', onKey, true)
+  }, [step, zooming])
 
   const { label, sublabel } = STEPS_META[step]
 

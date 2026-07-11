@@ -20,22 +20,27 @@ import Slide11Models from './slides/Slide11Models'
 import Slide12FinOps from './slides/Slide12FinOps'
 import Slide13OnePlatform from './slides/Slide13OnePlatform'
 import Slide14CTA from './slides/Slide14CTA'
+import Slide15CTAClean from './slides/Slide15CTAClean'
+import SlideCoverClean from './slides/SlideCoverClean'
+import SlideQuoteLisa from './slides/SlideQuoteLisa'
 
 const SLIDES = [
-  Slide01Cover, Slide02Insight, Slide03NotReady, Slide04Industries,
+  SlideCoverClean, SlideQuoteLisa, Slide01Cover, Slide02Insight, Slide03NotReady, Slide04Industries,
   Slide05ControlPlane, Slide06Customers, Slide07AgentsAct, Slide08AgentsBuild,
   Slide09Meaning, Slide10Proof, Slide10Secure, Slide11Models, Slide12FinOps,
-  Slide13OnePlatform, Slide14CTA,
+  Slide13OnePlatform, Slide14CTA, Slide15CTAClean,
 ]
 
 const TITLES = [
-  'Cover', 'The Insight', 'Not Ready', 'Art of the Possible',
+  'Title', 'Quote', 'Cover', 'The Insight', 'Not Ready', 'Art of the Possible',
   'The Control Plane', 'Customers', 'Agents that Act', 'Agents that Build',
   'Meaning', 'Why We Win', 'Secure by Design', 'Model Flexibility', 'FinOps',
-  'One Platform', 'Call to Action',
+  'One Platform', 'Call to Action', 'Close',
 ]
 
 const NOTES = [
+  'Opening title slide — The Agentic Enterprise.',
+  'Icebreaker quote.',
   'Open with the vision: Snowflake Cortex Code brings agentic AI directly to where data work happens.',
   'Frame the core insight driving the shift to the agentic enterprise.',
   'Most organizations are not yet ready for agents — call out the readiness gap.',
@@ -51,6 +56,7 @@ const NOTES = [
   'Cover FinOps: cost visibility and control for AI workloads.',
   'One platform across clouds and tools — highlight the ecosystem logos.',
   'Close with a clear call to action and next steps.',
+  'Clean close — no action items, just the statement.',
 ]
 
 const variants = {
