@@ -27,7 +27,7 @@ export default function Slide10Proof() {
   return (
     <div className="flex h-full w-full flex-col pt-1">
       <h2 className="text-center text-[38px] font-extrabold tracking-tight text-sf-navy">
-        Why Snowflake <span className="gradient-blue">wins.</span>
+        Why Snowflake <span className="gradient-blue">is differentiated.</span>
       </h2>
       <p className="mt-1 text-center text-[13px] text-sf-mist">
         More accurate, more efficient, and faster for enterprise-grade data work — proof, not promises.
@@ -127,9 +127,8 @@ export default function Slide10Proof() {
 
           {/* Hard questions — dark card that pops */}
           <div className="flex-1 rounded-xl border border-sf-blue/20 bg-gradient-to-br from-sf-navy to-[#1e1a3f] p-4 shadow-[0_0_40px_-12px_rgba(41,181,232,0.4)]">
-            <div className="mb-3 flex items-center justify-between">
+            <div className="mb-3">
               <p className="text-[10px] font-semibold uppercase tracking-wider text-white/40">Where Snowflake stands alone</p>
-              <span className="rounded-full bg-sf-blue/25 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-widest text-sf-blue">Snowflake Only</span>
             </div>
             <ul className="space-y-2">
               {HARD_Q.map((q) => (
