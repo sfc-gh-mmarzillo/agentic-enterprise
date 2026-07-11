@@ -27,7 +27,7 @@ export default function Slide10Proof() {
   return (
     <div className="flex h-full w-full flex-col pt-1">
       <h2 className="text-center text-[38px] font-extrabold tracking-tight text-sf-navy">
-        Snowflake <span className="gradient-blue">just wins.</span>
+        Why Snowflake <span className="gradient-blue">wins.</span>
       </h2>
       <p className="mt-1 text-center text-[13px] text-sf-mist">
         More accurate, more efficient, and faster for enterprise-grade data work — proof, not promises.
@@ -78,8 +78,8 @@ export default function Slide10Proof() {
             </div>
           </div>
 
-          {/* accuracy stat bars */}
-          <div className="rounded-2xl border border-sf-line bg-white/80 p-4">
+          {/* accuracy stat bars — flex-1 so it matches the hard-questions card height */}
+          <div className="flex-1 rounded-2xl border border-sf-line bg-white/80 p-4">
             <p className="text-[11px] font-semibold uppercase tracking-wider text-sf-mist">Accuracy on hard enterprise questions</p>
             <div className="mt-3 space-y-2.5">
               {ACC.map(([label, val, color, bar, w]) => (
@@ -125,13 +125,17 @@ export default function Slide10Proof() {
             ))}
           </div>
 
-          <div className="flex-1 rounded-xl border border-sf-line bg-white/80 p-4">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-sf-mist">Complex questions Snowflake excels at</p>
-            <ul className="mt-2 space-y-1.5">
+          {/* Hard questions — dark card that pops */}
+          <div className="flex-1 rounded-xl border border-sf-blue/20 bg-gradient-to-br from-sf-navy to-[#1e1a3f] p-4 shadow-[0_0_40px_-12px_rgba(41,181,232,0.4)]">
+            <div className="mb-3 flex items-center justify-between">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-white/40">Where Snowflake stands alone</p>
+              <span className="rounded-full bg-sf-blue/25 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-widest text-sf-blue">Snowflake Only</span>
+            </div>
+            <ul className="space-y-2">
               {HARD_Q.map((q) => (
-                <li key={q} className="flex items-start gap-2 text-[11.5px] text-sf-slate">
-                  <span className="mt-0.5 text-sf-purple">▹</span>
-                  <span>{q}</span>
+                <li key={q} className="flex items-start gap-2.5 rounded-lg bg-white/[0.07] px-3 py-2.5 border border-white/10">
+                  <img src="/logos/snowflake.png" alt="" className="mt-0.5 h-3 w-3 shrink-0 opacity-70" style={{ objectFit: 'contain', filter: 'brightness(10)' }} />
+                  <span className="font-mono text-[10.5px] leading-snug text-white/85">{q}</span>
                 </li>
               ))}
             </ul>
