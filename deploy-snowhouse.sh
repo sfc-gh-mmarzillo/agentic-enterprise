@@ -1,0 +1,72 @@
+#!/bin/bash
+set -e
+
+CONN="sfcogsops-snowhouse_aws_us_west_2"
+REGISTRY="sfcogsops-snowhouse-aws-us-west-2.registry.snowflakecomputing.com"
+IMAGE_REPO="temp/mmarzillo_coco/coco_images"
+IMAGE="coco-presentation"
+DB="TEMP"
+SCHEMA="MMARZILLO_COCO"
+SERVICE="COCO_PRESENTATION_SERVICE"
+POOL="SYSTEM_COMPUTE_POOL_CPU"
+
+echo "=== 1/5  Login to Snowhouse registry ==="
+snow spcs image-registry login --connection "$CONN"
+
+echo "=== 2/5  Build Docker image ==="
+docker build --platform linux/amd64 -t ${IMAGE}:latest .
+
+echo "=== 3/5  Tag and push ==="
+docker tag ${IMAGE}:latest ${REGISTRY}/${IMAGE_REPO}/${IMAGE}:latest
+docker push ${REGISTRY}/${IMAGE_REPO}/${IMAGE}:latest
+
+echo "=== 4/5  Update service spec with pinned digest + restart ==="
+# Get the exact amd64 digest from the registry
+DIGEST=$(docker manifest inspect ${REGISTRY}/${IMAGE_REPO}/${IMAGE}:latest 2>/dev/null \
+  | python3 -c "import sys,json; m=json.load(sys.stdin); print(next(x['digest'] for x in m['manifests'] if x['platform']['architecture']=='amd64'))")
+echo "  Using digest: $DIGEST"
+
+env -u "SNOWFLAKE_CONNECTIONS_SFCOGSOPS-SNOWHOUSE_AWS_US_WEST_2_SESSION_TOKEN" \
+    -u "SNOWFLAKE_CONNECTIONS_SFCOGSOPS-SNOWHOUSE_AWS_US_WEST_2_MASTER_TOKEN" \
+snow sql -c "$CONN" -q "
+  USE ROLE TECHNICAL_ACCOUNT_MANAGER;
+  ALTER SERVICE TEMP.MMARZILLO_COCO.COCO_PRESENTATION_SERVICE FROM SPECIFICATION \$\$
+spec:
+  containers:
+    - name: web
+      image: ${REGISTRY}/${IMAGE_REPO}/${IMAGE}@${DIGEST}
+      resources:
+        limits:
+          memory: 512M
+          cpu: '1'
+        requests:
+          memory: 256M
+          cpu: '0.5'
+  endpoints:
+    - name: web
+      port: 8080
+      public: true
+\$\$;
+"
+
+echo "=== 5/5  Endpoint URL + grants ==="
+env -u "SNOWFLAKE_CONNECTIONS_SFCOGSOPS-SNOWHOUSE_AWS_US_WEST_2_SESSION_TOKEN" \
+    -u "SNOWFLAKE_CONNECTIONS_SFCOGSOPS-SNOWHOUSE_AWS_US_WEST_2_MASTER_TOKEN" \
+snow sql -c "$CONN" -q "
+  USE ROLE TECHNICAL_ACCOUNT_MANAGER;
+  GRANT USAGE ON SCHEMA TEMP.MMARZILLO_COCO TO ROLE PUBLIC;
+  GRANT USAGE ON SCHEMA TEMP.MMARZILLO_COCO TO ROLE SALES_ENGINEER;
+  GRANT USAGE ON SCHEMA TEMP.MMARZILLO_COCO TO ROLE SNOWHOUSE_BASIC_RL;
+  GRANT USAGE ON SCHEMA TEMP.MMARZILLO_COCO TO ROLE MANAGER_RL;
+  GRANT USAGE ON SERVICE TEMP.MMARZILLO_COCO.COCO_PRESENTATION_SERVICE TO ROLE PUBLIC;
+  GRANT USAGE ON SERVICE TEMP.MMARZILLO_COCO.COCO_PRESENTATION_SERVICE TO ROLE SALES_ENGINEER;
+  GRANT USAGE ON SERVICE TEMP.MMARZILLO_COCO.COCO_PRESENTATION_SERVICE TO ROLE SNOWHOUSE_BASIC_RL;
+  GRANT USAGE ON SERVICE TEMP.MMARZILLO_COCO.COCO_PRESENTATION_SERVICE TO ROLE MANAGER_RL;
+  GRANT SERVICE ROLE TEMP.MMARZILLO_COCO.COCO_PRESENTATION_SERVICE!ALL_ENDPOINTS_USAGE TO ROLE PUBLIC;
+  GRANT SERVICE ROLE TEMP.MMARZILLO_COCO.COCO_PRESENTATION_SERVICE!ALL_ENDPOINTS_USAGE TO ROLE SALES_ENGINEER;
+  GRANT SERVICE ROLE TEMP.MMARZILLO_COCO.COCO_PRESENTATION_SERVICE!ALL_ENDPOINTS_USAGE TO ROLE SNOWHOUSE_BASIC_RL;
+  GRANT SERVICE ROLE TEMP.MMARZILLO_COCO.COCO_PRESENTATION_SERVICE!ALL_ENDPOINTS_USAGE TO ROLE MANAGER_RL;
+  SHOW ENDPOINTS IN SERVICE TEMP.MMARZILLO_COCO.COCO_PRESENTATION_SERVICE;
+"
+
+echo "=== Done! ==="
