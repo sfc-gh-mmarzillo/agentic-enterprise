@@ -26,62 +26,77 @@ import Slide12FinOps from './slides/Slide12FinOps'
 import Slide11Models from './slides/Slide11Models'
 import Slide13OnePlatform from './slides/Slide13OnePlatform'
 import Slide14CTA from './slides/Slide14CTA'
+import SlideReleases from './slides/SlideReleases'
+import { SlideBreakAgenticCP, SlideBreakGoverned, SlideBreakBanking, SlideBreakNextSteps } from './slides/SlideBreak'
 
 const SLIDES = [
   SlideFifthThirdCover,   // 0  Title
   SlideAgenda,            // 1  Agenda
   SlideTeamIntro,         // 2  Team Intro
-  SlideQuote,             // 3  Quote (hidden)
-  Slide01Cover,           // 4  The Agentic Enterprise
-  Slide02Insight,         // 5  Insight
-  Slide03NotReady,        // 6  Not Ready
-  Slide04Industries,      // 7  Art of the Possible
-  SlideRavenAtScale,      // 8  Raven at Scale
-  Slide05ControlPlane,    // 9  The Control Plane
-  SlideAssembled,         // 10 Assembled, Not Unified
-  Slide06Customers,       // 11 Customers (hidden)
-  Slide07AgentsAct,       // 12 Agents that Act
-  Slide08AgentsBuild,     // 13 Agents that Build
-  Slide09Meaning,         // 14 Meaning
-  Slide10Proof,           // 15 Why We Win
-  Slide10Secure,          // 16 Secure by Design
-  Slide12FinOps,          // 17 FinOps
-  Slide11Models,          // 18 Model Flexibility
-  Slide13OnePlatform,     // 19 One Platform
-  Slide14CTA,             // 20 Call to Action
+  SlideBreakAgenticCP,    // 3  Break: Agentic Control Plane
+  SlideQuote,             // 4  Quote (hidden)
+  Slide01Cover,           // 5  The Agentic Enterprise
+  Slide02Insight,         // 6  Insight
+  Slide03NotReady,        // 7  Not Ready
+  Slide04Industries,      // 8  Art of the Possible
+  SlideRavenAtScale,      // 9  Raven at Scale
+  Slide05ControlPlane,    // 10 The Control Plane
+  SlideAssembled,         // 11 Assembled, Not Unified
+  SlideReleases,          // 12 Release Highlights
+  Slide06Customers,       // 13 Customers (hidden)
+  SlideBreakGoverned,     // 14 Break: Business-First Governed
+  Slide07AgentsAct,       // 15 Agents that Act
+  Slide08AgentsBuild,     // 16 Agents that Build
+  Slide09Meaning,         // 17 Meaning
+  Slide10Proof,           // 18 Why Snowflake is Differentiated
+  Slide10Secure,          // 19 Secure by Design
+  Slide12FinOps,          // 20 FinOps
+  Slide11Models,          // 21 Model Flexibility
+  Slide13OnePlatform,     // 22 One Platform
+  Slide14CTA,             // 23 Call to Action
+  SlideBreakBanking,      // 24 Break: Agentic AI in Regulated Banking
+  SlideBreakNextSteps,    // 25 Break: Next Steps & Q&A
 ]
 
 const TITLES = [
-  'Title', 'Agenda', 'Team Intro', 'Quote',
-  'Cover', 'The Insight', 'Not Ready', 'Art of the Possible',
-  'Raven at Scale', 'The Control Plane', 'Assembled, Not Unified',
-  'Customers', 'Agents that Act', 'Agents that Build',
-  'Meaning', 'Why Snowflake is Differentiated', 'Secure by Design', 'FinOps',
+  'Title', 'Agenda', 'Team Intro', 'Break: Agentic Control Plane', 'Quote',
+  'Cover', 'Insight', 'Not Ready', 'Art of the Possible',
+  'Raven at Scale', 'Control Plane', 'Assembled Not Unified',
+  'Release Highlights',
+  'Customers', 'Break: Governed Framework',
+  'Agents that Act', 'Agents that Build', 'Meaning',
+  'Why Snowflake is Differentiated', 'Secure by Design', 'FinOps',
   'Model Flexibility', 'One Platform', 'Call to Action',
+  'Break: Regulated Banking', 'Break: Next Steps & Q&A',
 ]
 
 const NOTES = [
-  'Snowflake × Fifth Third Bank co-branded title. Set the scene: this is a partnership conversation about where enterprise AI is going.',
-  'Walk through the six topics — set expectations, confirm timing, ask if anything should be added.',
-  'Introduce the Snowflake account team. Build rapport before diving into the pitch.',
-  'Optional quote slide — use if the tone calls for an inspirational open.',
-  'Open with the vision: the agentic enterprise is the next major inflection. Intelligence embedded in the operating fabric.',
+  'Snowflake × Fifth Third Bank co-branded title.',
+  'Walk through the agenda topics — set expectations.',
+  'Introduce the Snowflake account team.',
+  'Section break — Agentic Control Plane & Release Updates.',
+  'Optional Sridhar quote slide.',
+  'Open with the vision: the agentic enterprise is the next major inflection.',
   'Frame the core insight: from insight to action in minutes, not days.',
-  'Most organizations are not yet ready for agents — call out the readiness gap and position Snowflake as the path forward.',
-  'Walk through a live use case per industry and LOB: sources → processing → agentic ML → agent action. Let the pipeline animate.',
-  'Raven at Scale — show the full CoWork architecture and prove enterprise readiness with 1,000s of customers. Offer referenceable names.',
-  'Position Cortex as the control plane that unifies governance, compute, and models. Click through phases.',
-  'Assembled vs. Unified — contrast generic stacks against Snowflake\'s native platform. Let the animation build.',
-  'Customer proof points — Sanofi, AstraZeneca, Toyota. Use if audience wants third-party validation.',
-  'Show agents taking action against governed data, not just answering questions.',
+  'Most organizations are not yet ready for agents — call out the readiness gap.',
+  'Walk through a live use case per industry and LOB. Let the pipeline animate.',
+  'Raven at Scale — show the full CoWork architecture with 1,000s of customers.',
+  'Position Cortex as the control plane that unifies governance, compute, and models.',
+  'Assembled vs. Unified — contrast generic stacks against Snowflake native platform.',
+  'Cortex AI release highlights — last 6 months, plus upcoming roadmap items.',
+  'Customer proof points — use if audience wants third-party validation.',
+  'Section break — Business-First Governed, Efficient AI Framework.',
+  'Show agents taking action against governed data.',
   'Show how teams build and deploy agents quickly on Snowflake.',
-  'Tie the capabilities back to business meaning and value. The context advantage.',
-  'Assertive proof slide: same model, better accuracy (24.1%→47.1%→86.3%), 4× fewer tokens, 28% faster pipelines, 66% lower cost.',
-  'AI security: three pillars — Agent, Data, Platform Security. 20+ governed agents in production.',
-  'Cover FinOps: cost visibility and control for AI workloads.',
+  'Tie the capabilities back to business meaning and value.',
+  'Why Snowflake is differentiated — accuracy, efficiency, and speed benchmarks.',
+  'AI security: three pillars — Agent, Data, Platform Security.',
+  'FinOps: cost visibility and control for AI workloads.',
   'Every frontier model, one endpoint — switch providers with no code changes.',
-  'One platform across clouds and tools — highlight the ecosystem logos.',
-  'Close with a clear call to action and next steps — POC Day Workshop or Architecture Workshop.',
+  'One platform across clouds and tools.',
+  'Call to action — POC Day Workshop or Architecture Workshop.',
+  'Section break — Agentic AI in Regulated Banking.',
+  'Section break — Next Steps & Q&A.',
 ]
 
 const variants = {
@@ -94,7 +109,7 @@ export default function App() {
   const [[index, dir], setState] = useState([0, 0])
   const [dark, setDark] = useState(false)
   const [panel, setPanel] = useState(null) // 'notes' | 'slides' | null
-  const [hidden, setHidden] = useState(() => new Set([3, 11]))
+  const [hidden, setHidden] = useState(() => new Set([4, 6, 7, 13, 23]))
   const total = SLIDES.length
 
   const visible = SLIDES.map((_, i) => i).filter((i) => !hidden.has(i))

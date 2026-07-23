@@ -35,7 +35,9 @@ export default function Slide07AgentsAct() {
         {/* left */}
         <div className="rounded-2xl border border-sf-line bg-white/70 p-5">
           <div className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-sf-blue/10 text-sf-blue">❄</span>
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-sf-blue/10 p-1">
+              <img src="/logos/snowflake.png" alt="Snowflake" className="h-full w-full object-contain" />
+            </span>
             <div>
               <p className="text-[15px] font-bold text-sf-blue">CoWork</p>
               <p className="text-[11px] text-sf-mist">Personal work agent</p>

@@ -7,7 +7,8 @@ const SCENARIOS = [
     usecase: 'Risk & Compliance Intelligence',
     sources: ['Bloomberg', 'Salesforce', 'Customer360'],
     processing: ['Scanning counterparty exposure...', 'Correlating market sentiment signals', 'Scoring portfolio risk positions'],
-    ml: { title: 'Credit Risk Model', steps: ['Loading 90-day market features...', 'Retraining gradient-boosted model', 'Validating against hold-out set → AUC 0.94'] },
+    agentType: 'ml',
+    agent: { title: 'Credit Risk Model', steps: ['Loading 90-day market features...', 'Retraining gradient-boosted model', 'Validating against hold-out set → AUC 0.94'] },
     action: { do: 'Flagging 3 at-risk positions to compliance team', win: 'Proactive risk mitigation before market close' },
     progress: 0,
     quote: ['Capital One', 'Snowflake enables us to run ML at petabyte scale, serving our risk and fraud models in near real time.'],
@@ -17,7 +18,8 @@ const SCENARIOS = [
     usecase: 'Automated Claims & Fraud Detection',
     sources: ['Claims DB', 'Weather API', 'Policyholder CRM'],
     processing: ['Ingesting new claims batch (1,247)...', 'Correlating with weather event patterns', 'Flagging anomalous claim clusters'],
-    ml: { title: 'Fraud Probability Scorer', steps: ['Enriching claims with geo + weather data...', 'Running fraud detection ensemble', 'Scoring complete → 23 flagged for review'] },
+    agentType: 'ml',
+    agent: { title: 'Fraud Probability Scorer', steps: ['Enriching claims with geo + weather data...', 'Running fraud detection ensemble', 'Scoring complete → 23 flagged for review'] },
     action: { do: 'Auto-routing 1,224 clean claims; escalating 23 to SIU', win: '70% faster claims processing, reduced fraud loss' },
     progress: 0,
     quote: ['Zurich Insurance', 'Snowflake allows us to be more precise in our pricing while keeping underwriters in control.'],
@@ -27,7 +29,8 @@ const SCENARIOS = [
     usecase: 'Patient Risk & Clinical Intelligence',
     sources: ['EHR System', 'Claims Data', 'Clinical Trials'],
     processing: ['Matching patient cohorts to protocols...', 'Analyzing treatment outcome patterns', 'Detecting adverse event signals'],
-    ml: { title: 'Patient Risk Stratifier', steps: ['Building features from longitudinal EHR...', 'Training readmission risk model', 'Validating against outcomes → AUC 0.91'] },
+    agentType: 'cowork',
+    agent: { title: 'Patient CoWork Agent', steps: ['Loading clinical context from EHR semantic views...', 'Agent querying cohort + outcomes data', 'Care gaps surfaced in CoWork → 12 flagged'] },
     action: { do: 'Flagging 12 high-risk patients for care coordinator review', win: '28% reduction in unplanned readmissions' },
     progress: 2,
     quote: ['Bupa', 'Snowflake gives us the ability to connect patients to the right treatments faster than ever before.'],
@@ -37,7 +40,8 @@ const SCENARIOS = [
     usecase: 'Dynamic Pricing & Personalisation',
     sources: ['Booking Engine', 'Loyalty DB', 'Pricing API'],
     processing: ['Pulling 30-day booking velocity...', 'Analyzing route demand elasticity', 'Computing competitor fare deltas'],
-    ml: { title: 'Dynamic Pricing Model', steps: ['Building elasticity curves per route...', 'Optimizing yield with demand forecast', 'Generating pricing recommendations'] },
+    agentType: 'dashboard',
+    agent: { title: 'Revenue Dashboard', steps: ['Auto-generating yield vs. demand visuals...', 'Building route-level drill-down KPIs', 'Published to RM team → live pricing view'] },
     action: { do: 'Adjusting 14 route pricing tiers, notifying RM team', win: '3-5% yield improvement per route per quarter' },
     progress: 2,
     quote: ['Travel Client (via Tredence)', 'NPS +7 points, avg member value +$500 via personalization'],
@@ -47,7 +51,8 @@ const SCENARIOS = [
     usecase: 'Churn Prevention & Retention',
     sources: ['Network Logs', 'CRM', 'Usage DB'],
     processing: ['Streaming usage pattern changes...', 'Detecting engagement drop signals', 'Cross-referencing support tickets'],
-    ml: { title: 'Churn Propensity Model', steps: ['Feature engineering on 90-day behavior...', 'Training survival model with tenure features', 'Scoring base → 842 high-risk subscribers'] },
+    agentType: 'ml',
+    agent: { title: 'Churn Propensity Model', steps: ['Feature engineering on 90-day behavior...', 'Training survival model with tenure features', 'Scoring base → 842 high-risk subscribers'] },
     action: { do: 'Triggering retention offers via preferred channel', win: '22% reduction in high-value churn' },
     progress: 2,
     quote: ['AT&T', 'We achieved 84% annual cost savings and dramatically accelerated our time to insight.'],
@@ -57,7 +62,8 @@ const SCENARIOS = [
     usecase: 'Inventory & Demand Forecasting',
     sources: ['POS System', 'Inventory', 'Supplier Portal'],
     processing: ['Analyzing real-time sales velocity...', 'Predicting stock-out risk by SKU', 'Checking supplier lead times'],
-    ml: { title: 'Demand Forecast Model', steps: ['Retraining on latest 14-day sales...', 'Factoring seasonality + promotions', 'Generating reorder recommendations'] },
+    agentType: 'app',
+    agent: { title: 'Inventory Native App', steps: ['Packaging reorder logic into Streamlit...', 'Deploying via SPCS to merchandising team', 'App live → buyers reviewing alerts in real time'] },
     action: { do: 'Auto-reordering 38 SKUs, alerting merchandising team', win: '40% reduction in lost sales from stock-outs' },
     progress: 2,
     quote: ['ABB', 'Snowflake brought together 40 ERP systems — unlocking roughly $200M in annual inventory savings.'],
@@ -67,7 +73,8 @@ const SCENARIOS = [
     usecase: 'Fleet & Freight Optimization',
     sources: ['Telematics / ELD', 'TMS & Load Board', 'Fuel & Weather API'],
     processing: ['Streaming 12,400 vehicle GPS pings...', 'Detecting route delay & idle patterns', 'Matching load demand to fleet capacity'],
-    ml: { title: 'Route & ETA Optimizer', steps: ['Building features from telematics + traffic...', 'Optimizing multi-stop routes vs. demand forecast', 'Scoring lanes → 96% on-time ETA confidence'] },
+    agentType: 'cowork',
+    agent: { title: 'Dispatch CoWork Agent', steps: ['Agent streaming fleet + load semantic views...', 'Running multi-stop route optimization', 'Dispatch decisions surfaced via CoWork'] },
     action: { do: 'Rerouting 47 loads, dispatching drivers, flagging 6 trucks for maintenance', win: '11% fewer empty miles, 8% fuel savings, higher on-time delivery' },
     progress: 2,
     quote: ['Global Supply Chain Leader', 'One governed view across fleet, freight, and demand data — powering faster, smarter dispatch and pricing decisions.'],
@@ -77,7 +84,8 @@ const SCENARIOS = [
     usecase: 'Close Automation & Variance Analysis',
     sources: ['ERP', 'Banking Feeds', 'General Ledger'],
     processing: ['Pulling daily transaction feeds...', 'Matching GL entries across entities', 'Detecting unreconciled variances'],
-    ml: { title: 'Forecast Variance Model', steps: ['Computing rolling actuals vs. plan...', 'Identifying systematic drift patterns', 'Generating correction recommendations'] },
+    agentType: 'app',
+    agent: { title: 'Close Automation App', steps: ['Packaging reconciliation logic into Streamlit...', 'Deploying to SPCS for finance team access', 'CFO reviewing live variance drill-down'] },
     action: { do: 'Drafting 4 journal entry corrections for review', win: '5-day faster close, 90% fewer manual reconciliations' },
     progress: 1,
     quote: ['ABB', 'Millions in savings from unified ERP data'],
@@ -87,7 +95,8 @@ const SCENARIOS = [
     usecase: 'Multi-Touch Attribution & Optimisation',
     sources: ['Ad Platforms', 'CRM', 'Web Analytics'],
     processing: ['Aggregating multi-channel spend...', 'Computing multi-touch attribution', 'Scoring campaign performance'],
-    ml: { title: 'Campaign Optimizer', steps: ['Segmenting audiences by LTV...', 'Modeling channel interaction effects', 'Recommending budget reallocation'] },
+    agentType: 'dashboard',
+    agent: { title: 'Attribution Dashboard', steps: ['Building multi-touch KPIs in Snowsight...', 'Real-time spend vs. performance charts', 'CMO dashboard published → live budget view'] },
     action: { do: 'Reallocating $42K to top performers, pausing 3 campaigns', win: '18% improvement in CAC efficiency' },
     progress: 0,
     quote: ['Digital Virgo', 'Snowflake cut our data latency by 90% and eliminated silos across 40+ markets.'],
@@ -97,7 +106,8 @@ const SCENARIOS = [
     usecase: 'Pipeline Intelligence & Rep Productivity',
     sources: ['CRM', 'Email', 'Call Transcripts'],
     processing: ['Analyzing deal engagement signals...', 'Computing pipeline velocity metrics', 'Detecting stalled opportunities'],
-    ml: { title: 'Win Probability Model', steps: ['Extracting sentiment from calls...', 'Scoring deals on engagement recency', 'Ranking pipeline by close likelihood'] },
+    agentType: 'cowork',
+    agent: { title: 'Raven Sales Agent', steps: ['Loading SFDC + usage signals via semantic views...', 'Agent running account 360 + pipeline queries', 'Insights delivered in CoWork → 8 deals prioritized'] },
     action: { do: 'Prioritizing 8 deals for outreach, drafting follow-ups', win: '15% uplift in conversion rate, 2x rep productivity' },
     progress: 1,
     quote: ['Snowflake', '25% higher engagement, 2x conversion with propensity scoring'],
@@ -107,7 +117,8 @@ const SCENARIOS = [
     usecase: 'Workforce Analytics & Retention',
     sources: ['HRIS', 'Pulse Surveys', 'Perf Reviews'],
     processing: ['Analyzing engagement survey trends...', 'Correlating with tenure + performance', 'Detecting early flight risk signals'],
-    ml: { title: 'Flight Risk Model', steps: ['Building features from HR signals...', 'Training attrition predictor', 'Scoring workforce → 14 high-risk flagged'] },
+    agentType: 'ml',
+    agent: { title: 'Flight Risk Model', steps: ['Building features from HR signals...', 'Training attrition predictor', 'Scoring workforce → 14 high-risk flagged'] },
     action: { do: 'Triggering retention workflow, alerting skip-level manager', win: '30% reduction in regrettable attrition' },
     progress: 1,
     quote: ['SD Worx', 'We surface daily workforce insights on anomalies and absenteeism across our entire customer base.'],
@@ -171,12 +182,31 @@ export default function Slide04Industries() {
           <p className="font-mono text-[10.5px] text-sf-green">✓ Complete</p>
         </Col>
         <Arrow />
-        <Col title="Agentic ML">
-          <div className="mb-1 flex items-center gap-1.5 rounded-md bg-sf-purple/8 px-2 py-1 text-[11px] font-medium text-sf-ink">
-            <span className="h-1.5 w-1.5 rounded-full bg-sf-purple" />{d.ml.title}
+        <Col title={
+          d.agentType === 'cowork' ? 'CoWork Agent' :
+          d.agentType === 'app'    ? 'Deployed App' :
+          d.agentType === 'dashboard' ? 'Live Dashboard' : 'Agentic ML'
+        }>
+          <div className="mb-1 flex items-center gap-1.5 rounded-md px-2 py-1 text-[11px] font-medium text-sf-ink"
+            style={{
+              background: d.agentType === 'cowork' ? 'rgba(41,181,232,0.1)' :
+                          d.agentType === 'app'    ? 'rgba(37,99,235,0.08)' :
+                          d.agentType === 'dashboard' ? 'rgba(13,148,136,0.09)' :
+                          'rgba(139,92,246,0.08)'
+            }}>
+            <span className="h-1.5 w-1.5 rounded-full shrink-0"
+              style={{
+                background: d.agentType === 'cowork' ? '#29b5e8' :
+                            d.agentType === 'app'    ? '#2563eb' :
+                            d.agentType === 'dashboard' ? '#0d9488' :
+                            '#8b5cf6'
+              }} />
+            {d.agent.title}
           </div>
-          {d.ml.steps.map((s, i) => (
-            <p key={i} className="font-mono text-[10.5px] leading-snug text-sf-slate"><span className="text-sf-mist">[{i + 1}]</span> {s}</p>
+          {d.agent.steps.map((s, i) => (
+            <p key={i} className="font-mono text-[10.5px] leading-snug text-sf-slate">
+              <span className="text-sf-mist">[{i + 1}]</span> {s}
+            </p>
           ))}
         </Col>
         <Arrow />

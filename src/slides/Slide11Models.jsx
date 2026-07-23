@@ -14,7 +14,7 @@ const RING = [
 export default function Slide11Models() {
   const R = 138
   return (
-    <div className="grid h-full w-full grid-cols-2 items-center gap-10">
+    <div className="grid h-full w-full grid-cols-2 items-center gap-10 px-6">
       <div>
         <p className="text-[12px] font-semibold uppercase tracking-[0.24em] text-sf-purple">Model Flexibility</p>
         <h2 className="mt-2 text-[48px] font-extrabold leading-[1.02] tracking-tight text-sf-navy">

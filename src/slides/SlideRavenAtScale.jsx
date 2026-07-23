@@ -14,27 +14,27 @@ const CUSTOM_TOOLS = ['Filtered Search', 'Template', 'Book of Business']
 const ROW1 = [
   {
     type: 'Cortex Analyst', name: 'Sales Data Assistant',
-    view: 'Sales Data Semantic View',
+    view: 'Sales Data',
     tables: ['Consumption Daily', 'Consumption Summary', 'SFDC Accounts', 'Fiscal Calendar', 'Opportunity'],
   },
   {
     type: 'Cortex Analyst', name: 'Account 360 Assistant',
-    view: 'A360 Semantic View',
+    view: 'A360',
     tables: ['Customer Support Cases', 'Daily Product Revenue', 'Daily Credit Consumption', 'Contracts', 'SFDC Accounts', 'Fiscal Calendar'],
   },
   {
     type: 'Cortex Analyst', name: 'Account Lookup',
-    view: 'Account Lookup Semantic View',
+    view: 'Account Lookup',
     tables: ['SFDC Account Customers', 'Snowflake Accounts'],
   },
   {
     type: 'Cortex Analyst', name: 'Use Case Explorer',
-    view: 'Use Case Explorer Semantic View',
+    view: 'Use Case Explorer',
     tables: ['SFDC Accounts', 'Use Cases'],
   },
   {
     type: 'Cortex Analyst', name: 'Org Chart Assistant',
-    view: 'Org Chart Semantic View',
+    view: 'Org Chart',
     tables: ['Org Structure', 'Employee Information', 'Reporting Relationships', 'Manager Hierarchies'],
   },
 ]
@@ -42,22 +42,22 @@ const ROW1 = [
 const ROW2 = [
   {
     type: 'Cortex Analyst', name: 'Quota Attainment',
-    view: 'Quota Attainment Semantic View',
+    view: 'Quota Attainment',
     tables: ['Quota Targets', 'Attainment Metrics', 'Reporting Structures', 'Employee Information'],
   },
   {
     type: 'Cortex Analyst', name: 'Marketing & Campaign',
-    view: 'Marketing DB Campaign Reporting Semantic View',
+    view: 'Mktg Campaign Reporting',
     tables: ['Marketing Database', 'Engagement Data'],
   },
   {
     type: 'Cortex Analyst', name: 'Support Cases',
-    view: 'Support Semantic View',
+    view: 'Support',
     tables: ['SFDC Account Customers', 'Snowflake Accounts'],
   },
   {
     type: 'Cortex Analyst', name: 'Partner Ecosystem Data',
-    view: 'Partner Ecosystem Semantic View',
+    view: 'Partner Ecosystem',
     tables: ['Snowflake Products', 'Snowflake Partners', 'Industry Examples', 'Customer Stories'],
   },
   {
@@ -79,40 +79,40 @@ function AgentBox({ type, name, view, tables }) {
   const isSearch = type === 'Cortex Search'
   const typeColor = isSearch ? '#0d9488' : '#1565a3'
   const viewBg    = isSearch ? '#0d9488' : '#1976a8'
-  const tableBg   = '#e8f4fb'
-  const tableBd   = '#b3d4e8'
 
   return (
     <div className="flex flex-col h-full rounded-lg overflow-hidden bg-white"
       style={{ border: '1.5px solid #1e3a5f' }}>
 
-      {/* CORTEX ANALYST → shows as SEMANTIC VIEWS per design; CORTEX SEARCH stays as-is */}
-      <div className="px-2 pt-1.5 pb-0.5">
-        <span className="text-[7px] font-extrabold uppercase tracking-widest"
+      {/* Compact header — type + name stacked, minimal padding */}
+      <div className="px-1.5 pt-0.5 pb-px">
+        <span className="text-[6px] font-extrabold uppercase tracking-widest block"
           style={{ color: typeColor, textDecoration: 'underline' }}>
-          {isSearch ? type : 'Semantic Views'}
+          {isSearch ? 'Cortex Search' : 'Semantic Views'}
         </span>
-      </div>
-
-      {/* Agent name */}
-      <div className="px-2 pb-1 text-center">
-        <span className="text-[10.5px] font-extrabold leading-tight"
+        <span className="text-[9px] font-extrabold leading-tight block text-center mt-px"
           style={{ color: '#1e3a5f' }}>{name}</span>
       </div>
 
-      {/* Semantic view teal bar */}
-      <div className="mx-1.5 mb-1 rounded py-0.5 px-1 text-center"
-        style={{ background: viewBg }}>
-        <span className="text-[7px] font-semibold text-white leading-tight">{view}</span>
+      {/* Semantic view bar — slim */}
+      <div className="mx-1 mb-0.5 rounded text-center"
+        style={{ background: viewBg, padding: '1px 3px' }}>
+        <span style={{ fontSize: 6.5, fontWeight: 600, color: '#fff', lineHeight: 1.2 }}>{view}</span>
       </div>
 
-      {/* Data table grid */}
-      <div className="flex-1 grid grid-cols-2 gap-0.5 px-1.5 pb-1 overflow-hidden">
+      {/* Tables — fixed 14px row height so rows always complete, no partial clipping */}
+      <div className="flex-1 grid grid-cols-2 gap-0.5 px-1 pb-0.5 overflow-hidden"
+        style={{ alignContent: 'start' }}>
         {tables.map((t, i) => (
           <div key={i}
-            className="rounded flex items-center justify-center text-center leading-tight px-0.5 py-[3px]"
-            style={{ background: tableBg, border: `0.5px solid ${tableBd}` }}>
-            <span className="text-[6.5px] text-gray-600">{t}</span>
+            className="rounded flex items-center justify-center text-center"
+            style={{
+              background: '#e8f4fb',
+              border: '0.5px solid #b3d4e8',
+              height: 14,
+              padding: '0 2px',
+            }}>
+            <span style={{ fontSize: 6, color: '#374151', lineHeight: 1.2 }}>{t}</span>
           </div>
         ))}
       </div>

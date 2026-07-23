@@ -18,7 +18,7 @@ export default function Slide12FinOps() {
           <img
             src="/accountoverviewdemo.gif"
             alt="Account Overview Demo"
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover object-left-top"
           />
         </div>
 

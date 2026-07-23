@@ -1,8 +1,8 @@
 const ITEMS = [
   { num: '01', label: 'Welcome & Introductions' },
-  { num: '02', label: 'Snowflake Strategic Vision: Agentic Control Plane' },
-  { num: '03', label: 'Agentic AI in Regulated Banking' },
-  { num: '04', label: 'Business-First Governed, Efficient AI Framework' },
+  { num: '02', label: 'Agentic Control Plane and release updates' },
+  { num: '03', label: 'Business-First Governed, Efficient AI Framework' },
+  { num: '04', label: 'Agentic AI in Regulated Banking' },
   { num: '05', label: 'Architecture Review + Q&A' },
 ]
 
