@@ -3,8 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Logo } from './logos'
 
 const ROWS = [
-  { label: 'Action Layer', color: '#d97706', tint: 'rgba(217,119,6,0.06)', items: ['CoWork', 'CoCo', 'Custom Agents'], kind: 'pill' },
-  { label: 'Agentic Service / Harness', color: '#0ea5e9', tint: 'rgba(14,165,233,0.06)', items: ['Agent SDK', 'Skills Runtime', 'Tool Router', 'MCP Gateway', 'Eval & Guardrails'], kind: 'pill' },
+  { label: 'Action Layer', color: '#d97706', tint: 'rgba(217,119,6,0.06)', items: ['CoWork', 'CoCo'], kind: 'pill' },
+  { label: 'Agentic Service / Harness', color: '#0ea5e9', tint: 'rgba(14,165,233,0.06)', items: ['Custom Agents', 'Agent SDK', 'Skills Runtime', 'Tool Router', 'MCP Gateway', 'Eval & Guardrails'], kind: 'pill' },
   { label: 'AI Models', color: '#8b5cf6', tint: 'rgba(139,92,246,0.05)', items: ['Anthropic', 'OpenAI', 'Meta', 'Mistral', 'Deepseek', 'Grok', 'Gemini'], kind: 'logo' },
   { label: 'Interop & Systems', color: '#2563eb', tint: 'rgba(37,99,235,0.05)', items: ['Slack', 'Atlassian', 'GitHub', 'Glean', 'Linear', 'Salesforce', 'Natoma'], kind: 'logo' },
   { label: 'Data & Context', color: '#0d9488', tint: 'rgba(13,148,136,0.06)', items: ['Skills', 'Horizon Catalog', 'Semantic Views', 'Cortex Sense'], kind: 'pill' },
@@ -13,7 +13,7 @@ const ROWS = [
 const PHASE_META = [
   { tag: '2014 — The Elastic Data Warehouse', title: 'Snowflake Architecture', sub: 'Storage, compute, and services — decoupled and elastic.' },
   { tag: 'Today — The AI Data Cloud', title: 'One Platform, Every Workload', sub: 'Snowflake powers every data and AI workload.' },
-  { tag: 'Next — The Agentic Era', title: 'The AI Control Plane', sub: 'Easy, Connected, Trusted' },
+  { tag: 'Next — The Agentic Era', title: 'The AI Gateway', sub: 'Easy, Connected, Trusted' },
 ]
 
 const SnowflakeLogo = ({ className = '', style }) => (
@@ -50,7 +50,7 @@ function ControlPlane() {
   return (
     <div className="w-full max-w-[980px] rounded-2xl border border-emerald-200/50 bg-white/40 p-4">
       <p className="mb-3 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-sf-teal">
-        Agentic Control Plane &mdash; Security · Governance · Identity · FinOps
+        Agentic AI Gateway &mdash; Security · Governance · Identity · FinOps
       </p>
       <div className="space-y-2.5">
         {ROWS.map((r) => (

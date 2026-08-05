@@ -12,6 +12,7 @@ import Slide03NotReady from './slides/Slide03NotReady'
 import Slide04Industries from './slides/Slide04Industries'
 import SlideRavenAtScale from './slides/SlideRavenAtScale'
 import Slide05ControlPlane from './slides/Slide05ControlPlane'
+import Slide05bTools from './slides/Slide05bTools'
 import SlideAssembled from './slides/SlideAssembled'
 import Slide06Customers from './slides/Slide06Customers'
 import Slide07AgentsAct from './slides/Slide07AgentsAct'
@@ -33,25 +34,26 @@ const SLIDES = [
   Slide03NotReady,        // 3  Not Ready
   Slide04Industries,      // 4  Art of the Possible
   SlideRavenAtScale,      // 5  Raven at Scale
-  Slide05ControlPlane,    // 6  The Control Plane
-  SlideAssembled,         // 7  Assembled, Not Unified
-  SlideReleases,          // 8  Release Highlights
-  Slide06Customers,       // 9  Customers (hidden)
-  Slide07AgentsAct,       // 10 Agents that Act
-  Slide08AgentsBuild,     // 11 Agents that Build
-  Slide09Meaning,         // 12 Meaning
-  Slide10Proof,           // 13 Why Snowflake is Differentiated
-  Slide10Secure,          // 14 Secure by Design
-  Slide12FinOps,          // 15 FinOps
-  Slide11Models,          // 16 Model Flexibility
-  Slide13OnePlatform,     // 17 One Platform
-  Slide14CTA,             // 18 Call to Action
-  SlideBreakNextSteps,    // 19 Break: Next Steps & Q&A
+  Slide05ControlPlane,    // 6  The AI Gateway
+  Slide05bTools,          // 7  Agent Tool Ecosystem
+  SlideAssembled,         // 8  Assembled, Not Unified
+  SlideReleases,          // 9  Release Highlights
+  Slide06Customers,       // 10 Customers (hidden)
+  Slide07AgentsAct,       // 11 Agents that Act
+  Slide08AgentsBuild,     // 12 Agents that Build
+  Slide09Meaning,         // 13 Meaning
+  Slide10Proof,           // 14 Why Snowflake is Differentiated
+  Slide10Secure,          // 15 Secure by Design
+  Slide12FinOps,          // 16 FinOps
+  Slide11Models,          // 17 Model Flexibility
+  Slide13OnePlatform,     // 18 One Platform
+  Slide14CTA,             // 19 Call to Action
+  SlideBreakNextSteps,    // 20 Break: Next Steps & Q&A
 ]
 
 const TITLES = [
   'Quote', 'Cover', 'Insight', 'Not Ready', 'Art of the Possible',
-  'Raven at Scale', 'Control Plane', 'Assembled Not Unified',
+  'Raven at Scale', 'AI Gateway', 'Agent Tool Ecosystem', 'Assembled Not Unified',
   'Release Highlights', 'Customers',
   'Agents that Act', 'Agents that Build', 'Meaning',
   'Why Snowflake is Differentiated', 'Secure by Design', 'FinOps',
@@ -66,7 +68,8 @@ const NOTES = [
   'Most organizations are not yet ready for agents — call out the readiness gap.',
   'Walk through a live use case per industry and LOB. Let the pipeline animate.',
   'Raven at Scale — show the full CoWork architecture with 1,000s of customers.',
-  'Position Cortex as the control plane that unifies governance, compute, and models.',
+  'Position Cortex as the AI gateway that unifies governance, compute, and models.',
+  'Show how agents connect to tools, data, and systems with policy and identity.',
   'Assembled vs. Unified — contrast generic stacks against Snowflake native platform.',
   'Cortex AI release highlights — last 6 months, plus upcoming roadmap items.',
   'Customer proof points — use if audience wants third-party validation.',
@@ -92,7 +95,7 @@ export default function App() {
   const [[index, dir], setState] = useState([0, 0])
   const [dark, setDark] = useState(false)
   const [panel, setPanel] = useState(null) // 'notes' | 'slides' | null
-  const [hidden, setHidden] = useState(() => new Set([0, 9]))
+  const [hidden, setHidden] = useState(() => new Set([0, 10]))
   const total = SLIDES.length
 
   const visible = SLIDES.map((_, i) => i).filter((i) => !hidden.has(i))
