@@ -4,10 +4,10 @@ import { Logo } from './logos'
 
 const ROWS = [
   { label: 'Action Layer', color: '#d97706', tint: 'rgba(217,119,6,0.06)', items: ['CoWork', 'CoCo'], kind: 'pill' },
-  { label: 'Agentic Service / Harness', color: '#0ea5e9', tint: 'rgba(14,165,233,0.06)', items: ['Custom Agents', 'Agent SDK', 'Skills Runtime', 'Tool Router', 'MCP Gateway', 'Eval & Guardrails'], kind: 'pill' },
-  { label: 'AI Models', color: '#8b5cf6', tint: 'rgba(139,92,246,0.05)', items: ['Anthropic', 'OpenAI', 'Meta', 'Mistral', 'Deepseek', 'Grok', 'Gemini'], kind: 'logo' },
-  { label: 'Interop & Systems', color: '#2563eb', tint: 'rgba(37,99,235,0.05)', items: ['Slack', 'Atlassian', 'GitHub', 'Glean', 'Linear', 'Salesforce', 'Natoma'], kind: 'logo' },
+  { label: 'Agentic Service / Harness', color: '#0ea5e9', tint: 'rgba(14,165,233,0.06)', items: [], kind: 'pill' },
   { label: 'Data & Context', color: '#0d9488', tint: 'rgba(13,148,136,0.06)', items: ['Skills', 'Horizon Catalog', 'Semantic Views', 'Cortex Sense'], kind: 'pill' },
+  { label: 'AI Models', color: '#8b5cf6', tint: 'rgba(139,92,246,0.05)', items: ['Anthropic', 'OpenAI', 'Meta', 'Mistral'], kind: 'logo' },
+  { label: 'Interop & Systems', color: '#2563eb', tint: 'rgba(37,99,235,0.05)', items: ['Slack', 'GitHub', 'Glean', 'Salesforce'], kind: 'logo' },
 ]
 
 const PHASE_META = [
