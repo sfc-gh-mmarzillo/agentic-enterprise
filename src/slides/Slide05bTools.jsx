@@ -5,9 +5,9 @@ export default function Slide05bTools() {
         Agent Tool Ecosystem
       </h2>
       
-      <div className="w-full max-w-[950px]">
+      <div className="w-full max-w-[1000px]">
         {/* Main content container */}
-        <div className="grid grid-cols-[280px_1fr_280px] gap-0 items-center">
+        <div className="relative grid grid-cols-[300px_1fr_300px] gap-12 items-center">
           
           {/* Left Column: CLIENTS & MODELS */}
           <div className="flex flex-col gap-3">
@@ -28,32 +28,10 @@ export default function Slide05bTools() {
             </div>
           </div>
 
-          {/* Center: Tools with Arrows */}
-          <div className="relative flex items-center justify-center">
-            {/* SVG for all arrows */}
-            <svg className="absolute inset-0 w-full h-full" style={{ overflow: 'visible' }}>
-              <defs>
-                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                  <path d="M0,0 L0,6 L9,3 z" fill="#10b981" />
-                </marker>
-              </defs>
-              
-              {/* Left arrows - connecting from left boxes to center Tools */}
-              <line x1="0" y1="22%" x2="38%" y2="22%" stroke="#10b981" strokeWidth="2.5" markerEnd="url(#arrowhead)" />
-              <line x1="0" y1="39%" x2="38%" y2="45%" stroke="#10b981" strokeWidth="2.5" markerEnd="url(#arrowhead)" />
-              <line x1="0" y1="61%" x2="38%" y2="55%" stroke="#10b981" strokeWidth="2.5" markerEnd="url(#arrowhead)" />
-              <line x1="0" y1="78%" x2="38%" y2="78%" stroke="#10b981" strokeWidth="2.5" markerEnd="url(#arrowhead)" />
-              
-              {/* Right arrows - connecting from center Tools to right boxes */}
-              <line x1="62%" y1="22%" x2="100%" y2="22%" stroke="#10b981" strokeWidth="2.5" markerEnd="url(#arrowhead)" />
-              <line x1="62%" y1="45%" x2="100%" y2="39%" stroke="#10b981" strokeWidth="2.5" markerEnd="url(#arrowhead)" />
-              <line x1="62%" y1="55%" x2="100%" y2="61%" stroke="#10b981" strokeWidth="2.5" markerEnd="url(#arrowhead)" />
-              <line x1="62%" y1="78%" x2="100%" y2="78%" stroke="#10b981" strokeWidth="2.5" markerEnd="url(#arrowhead)" />
-            </svg>
-
-            {/* Center Tools Box */}
-            <div className="relative z-10 rounded-2xl bg-blue-500 px-16 py-8 shadow-xl">
-              <p className="text-center text-[32px] font-bold text-white whitespace-nowrap">Tools</p>
+          {/* Center: Tools Box */}
+          <div className="flex items-center justify-center">
+            <div className="rounded-2xl bg-blue-500 px-20 py-10 shadow-xl">
+              <p className="text-center text-[36px] font-bold text-white whitespace-nowrap">Tools</p>
             </div>
           </div>
 
@@ -75,6 +53,41 @@ export default function Slide05bTools() {
               Custom & internal tools
             </div>
           </div>
+
+          {/* SVG Arrows Overlay */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ overflow: 'visible' }}>
+            <defs>
+              <marker id="arrowgreen" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="#10b981" />
+              </marker>
+            </defs>
+            
+            {/* Left side arrows: from boxes to Tools center */}
+            {/* Box 1 */}
+            <line x1="300" y1="68" x2="370" y2="165" stroke="#10b981" strokeWidth="3" markerEnd="url(#arrowgreen)" />
+            
+            {/* Box 2 */}
+            <line x1="300" y1="119" x2="370" y2="165" stroke="#10b981" strokeWidth="3" markerEnd="url(#arrowgreen)" />
+            
+            {/* Box 3 */}
+            <line x1="300" y1="170" x2="370" y2="165" stroke="#10b981" strokeWidth="3" markerEnd="url(#arrowgreen)" />
+            
+            {/* Box 4 */}
+            <line x1="300" y1="221" x2="370" y2="165" stroke="#10b981" strokeWidth="3" markerEnd="url(#arrowgreen)" />
+            
+            {/* Right side arrows: from Tools center to boxes */}
+            {/* Box 1 */}
+            <line x1="642" y1="165" x2="712" y2="68" stroke="#10b981" strokeWidth="3" markerEnd="url(#arrowgreen)" />
+            
+            {/* Box 2 */}
+            <line x1="642" y1="165" x2="712" y2="119" stroke="#10b981" strokeWidth="3" markerEnd="url(#arrowgreen)" />
+            
+            {/* Box 3 */}
+            <line x1="642" y1="165" x2="712" y2="170" stroke="#10b981" strokeWidth="3" markerEnd="url(#arrowgreen)" />
+            
+            {/* Box 4 */}
+            <line x1="642" y1="165" x2="712" y2="221" stroke="#10b981" strokeWidth="3" markerEnd="url(#arrowgreen)" />
+          </svg>
         </div>
 
         {/* Bottom text */}
