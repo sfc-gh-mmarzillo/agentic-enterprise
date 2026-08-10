@@ -46,7 +46,7 @@ export default function Slide05bTools() {
 
           {/* Center: Tools Box */}
           <div className="flex items-center justify-center py-20">
-            <div className="rounded-2xl bg-blue-500 px-24 py-12 shadow-xl">
+            <div className="rounded-2xl bg-blue-500 px-32 py-16 shadow-xl">
               <p className="text-center text-[40px] font-bold text-white whitespace-nowrap">Tools</p>
             </div>
           </div>
