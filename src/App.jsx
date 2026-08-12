@@ -95,7 +95,9 @@ export default function App() {
   const [[index, dir], setState] = useState([0, 0])
   const [dark, setDark] = useState(false)
   const [panel, setPanel] = useState(null) // 'notes' | 'slides' | null
-  const [hidden, setHidden] = useState(() => new Set([0, 10]))
+  const [hidden, setHidden] = useState(() => new Set([0, 8, 9, 10, 20]))
+  const [slideOrder, setSlideOrder] = useState(() => SLIDES.map((_, i) => i))
+  const [draggedItem, setDraggedItem] = useState(null)
   const total = SLIDES.length
 
   const visible = SLIDES.map((_, i) => i).filter((i) => !hidden.has(i))
@@ -128,6 +130,35 @@ export default function App() {
       else if (total - nextSet.size > 1) nextSet.add(i) // never hide the last visible slide
       return nextSet
     })
+  }
+
+  const handleDragStart = (e, index) => {
+    setDraggedItem(index)
+    e.dataTransfer.effectAllowed = 'move'
+  }
+
+  const handleDragOver = (e) => {
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'move'
+  }
+
+  const handleDrop = (e, dropIndex) => {
+    e.preventDefault()
+    if (draggedItem === null || draggedItem === dropIndex) return
+    
+    setSlideOrder((prev) => {
+      const newOrder = [...prev]
+      const dragItem = newOrder[draggedItem]
+      newOrder.splice(draggedItem, 1)
+      newOrder.splice(dropIndex, 0, dragItem)
+      return newOrder
+    })
+    
+    setDraggedItem(null)
+  }
+
+  const handleDragEnd = () => {
+    setDraggedItem(null)
   }
 
   useEffect(() => {
@@ -208,19 +239,28 @@ export default function App() {
       <AnimatePresence>
         {panel === 'slides' && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 16 }}
-            className="absolute bottom-20 right-6 z-40 max-h-[62vh] w-[300px] overflow-auto rounded-2xl border border-sf-line bg-white p-3 shadow-[0_18px_50px_-16px_rgba(15,23,42,0.4)]">
-            <p className="mb-2 px-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-sf-blue">Show / hide slides</p>
+            className="absolute bottom-20 right-6 z-40 max-h-[62vh] w-[320px] overflow-auto rounded-2xl border border-sf-line bg-white p-3 shadow-[0_18px_50px_-16px_rgba(15,23,42,0.4)]">
+            <p className="mb-2 px-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-sf-blue">Show / hide / reorder slides</p>
             <div className="space-y-0.5">
-              {SLIDES.map((_, i) => {
-                const isHidden = hidden.has(i)
+              {slideOrder.map((originalIndex, displayIndex) => {
+                const isHidden = hidden.has(originalIndex)
+                const isDragging = draggedItem === displayIndex
                 return (
-                  <div key={i}
-                    className={`flex items-center gap-2 rounded-lg px-2 py-1.5 text-[12.5px] ${i === index ? 'bg-sf-blue/10' : ''}`}>
-                    <button onClick={() => go(i)} disabled={isHidden}
+                  <div key={originalIndex}
+                    draggable={true}
+                    onDragStart={(e) => handleDragStart(e, displayIndex)}
+                    onDragOver={handleDragOver}
+                    onDrop={(e) => handleDrop(e, displayIndex)}
+                    onDragEnd={handleDragEnd}
+                    className={`flex items-center gap-2 rounded-lg px-2 py-1.5 text-[12.5px] transition-all cursor-move ${
+                      originalIndex === index ? 'bg-sf-blue/10' : ''
+                    } ${isDragging ? 'opacity-50 scale-95' : ''}`}>
+                    <span className="text-sf-mist cursor-grab active:cursor-grabbing">⋮⋮</span>
+                    <button onClick={() => go(originalIndex)} disabled={isHidden}
                       className={`flex-1 text-left ${isHidden ? 'text-sf-mist line-through' : 'text-sf-ink'} disabled:cursor-not-allowed`}>
-                      <span className="tabular-nums text-sf-mist">{i + 1}.</span> {TITLES[i]}
+                      <span className="tabular-nums text-sf-mist">{displayIndex + 1}.</span> {TITLES[originalIndex]}
                     </button>
-                    <button onClick={() => toggleHidden(i)} aria-label={isHidden ? 'Show slide' : 'Hide slide'}
+                    <button onClick={() => toggleHidden(originalIndex)} aria-label={isHidden ? 'Show slide' : 'Hide slide'}
                       className="grid h-6 w-6 place-items-center rounded text-sf-slate transition hover:bg-sf-panel">
                       {isHidden ? <EyeOff /> : <Eye />}
                     </button>
