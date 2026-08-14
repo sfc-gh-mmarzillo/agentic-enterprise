@@ -95,7 +95,7 @@ export default function App() {
   const [[index, dir], setState] = useState([0, 0])
   const [dark, setDark] = useState(false)
   const [panel, setPanel] = useState(null) // 'notes' | 'slides' | null
-  const [hidden, setHidden] = useState(() => new Set([0, 8, 9, 10, 20]))
+  const [hidden, setHidden] = useState(() => new Set([0, 8, 9, 10, 20])) // Slide 7 (Tools) is now visible
   const [slideOrder, setSlideOrder] = useState(() => SLIDES.map((_, i) => i))
   const [draggedItem, setDraggedItem] = useState(null)
   const total = SLIDES.length

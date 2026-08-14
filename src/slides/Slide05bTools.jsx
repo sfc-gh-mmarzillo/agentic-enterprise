@@ -14,33 +14,17 @@ export default function Slide05bTools() {
             <h3 className="mb-2 text-[14px] font-bold uppercase tracking-[0.12em] text-blue-500">
               Clients & Models
             </h3>
-            <div className="relative rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
+            <div className="rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
               CoCo & CoWork
-              {/* Right arrow */}
-              <div className="absolute left-full top-1/2 -translate-y-1/2 w-16 h-0.5 bg-green-500">
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[8px] border-l-green-500"></div>
-              </div>
             </div>
-            <div className="relative rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
+            <div className="rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
               Claude · ChatGPT · Gemini
-              {/* Right arrow */}
-              <div className="absolute left-full top-1/2 -translate-y-1/2 w-16 h-0.5 bg-green-500">
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[8px] border-l-green-500"></div>
-              </div>
             </div>
-            <div className="relative rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
+            <div className="rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
               Copilot · Cursor · IDEs
-              {/* Right arrow */}
-              <div className="absolute left-full top-1/2 -translate-y-1/2 w-16 h-0.5 bg-green-500">
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[8px] border-l-green-500"></div>
-              </div>
             </div>
-            <div className="relative rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
+            <div className="rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
               Custom & autonomous agents
-              {/* Right arrow */}
-              <div className="absolute left-full top-1/2 -translate-y-1/2 w-16 h-0.5 bg-green-500">
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[8px] border-l-green-500"></div>
-              </div>
             </div>
           </div>
 
@@ -56,35 +40,54 @@ export default function Slide05bTools() {
             <h3 className="mb-2 text-[14px] font-bold uppercase tracking-[0.12em] text-blue-500">
               Tools & Data
             </h3>
-            <div className="relative rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
-              {/* Left arrow */}
-              <div className="absolute right-full top-1/2 -translate-y-1/2 w-16 h-0.5 bg-green-500">
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[8px] border-l-green-500"></div>
-              </div>
+            <div className="rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
               Snowflake data & apps
             </div>
-            <div className="relative rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
-              {/* Left arrow */}
-              <div className="absolute right-full top-1/2 -translate-y-1/2 w-16 h-0.5 bg-green-500">
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[8px] border-l-green-500"></div>
-              </div>
+            <div className="rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
               SaaS applications
             </div>
-            <div className="relative rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
-              {/* Left arrow */}
-              <div className="absolute right-full top-1/2 -translate-y-1/2 w-16 h-0.5 bg-green-500">
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[8px] border-l-green-500"></div>
-              </div>
+            <div className="rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
               Cloud & on-prem systems
             </div>
-            <div className="relative rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
-              {/* Left arrow */}
-              <div className="absolute right-full top-1/2 -translate-y-1/2 w-16 h-0.5 bg-green-500">
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[8px] border-l-green-500"></div>
-              </div>
+            <div className="rounded-lg border-2 border-slate-300 bg-white px-4 py-3 text-[13px] font-medium text-slate-700">
               Custom & internal tools
             </div>
           </div>
+
+          {/* SVG Arrows Overlay - Dashed converging style */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ overflow: 'visible' }}>
+            <defs>
+              <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L9,3 z" fill="#10b981" />
+              </marker>
+            </defs>
+            
+            {/* Left side arrows: from boxes converging to Tools center */}
+            {/* Box 1 - top */}
+            <line x1="320" y1="68" x2="465" y2="180" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
+            
+            {/* Box 2 */}
+            <line x1="320" y1="119" x2="465" y2="180" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
+            
+            {/* Box 3 */}
+            <line x1="320" y1="170" x2="465" y2="180" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
+            
+            {/* Box 4 - bottom */}
+            <line x1="320" y1="221" x2="465" y2="180" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
+            
+            {/* Right side arrows: from Tools center diverging to boxes */}
+            {/* Box 1 - top */}
+            <line x1="547" y1="180" x2="692" y2="68" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
+            
+            {/* Box 2 */}
+            <line x1="547" y1="180" x2="692" y2="119" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
+            
+            {/* Box 3 */}
+            <line x1="547" y1="180" x2="692" y2="170" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
+            
+            {/* Box 4 - bottom */}
+            <line x1="547" y1="180" x2="692" y2="221" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
+          </svg>
         </div>
 
         {/* Bottom text */}
