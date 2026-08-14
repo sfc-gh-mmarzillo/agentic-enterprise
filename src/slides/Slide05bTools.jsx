@@ -1,135 +1,191 @@
 import { useState, useEffect, useCallback } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Logo } from './logos'
 
-const ROWS = [
-  { label: 'Action Layer', color: '#d97706', tint: 'rgba(217,119,6,0.06)', items: ['CoWork', 'CoCo'], kind: 'pill' },
-  { label: 'Agentic Service / Harness', color: '#0ea5e9', tint: 'rgba(14,165,233,0.06)', items: [], kind: 'pill' },
-  { label: 'Data & Context', color: '#0d9488', tint: 'rgba(13,148,136,0.06)', items: ['Skills', 'Horizon Catalog', 'Semantic Views', 'Cortex Sense'], kind: 'pill' },
-  { label: 'AI Models', color: '#8b5cf6', tint: 'rgba(139,92,246,0.05)', items: ['Anthropic', 'OpenAI', 'Meta', 'Mistral'], kind: 'logo' },
-  { label: 'Interop & Systems', color: '#2563eb', tint: 'rgba(37,99,235,0.05)', items: ['Slack', 'GitHub', 'Glean', 'Salesforce'], kind: 'logo' },
-]
-
-const SnowflakeLogo = ({ className = '', style }) => (
-  <img src="/logos/snowflake.png" alt="Snowflake logo" className={`invert-safe ${className}`}
-    style={{ display: 'block', width: '100%', height: '100%', objectFit: 'contain', ...style }} />
+const SnowflakeLogo = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+    <path d="M12 2L9.5 4.5L12 7L14.5 4.5L12 2ZM12 17L14.5 19.5L12 22L9.5 19.5L12 17ZM4.5 9.5L2 12L4.5 14.5L7 12L4.5 9.5ZM19.5 9.5L17 12L19.5 14.5L22 12L19.5 9.5ZM7.5 7.5L6 6L4.5 7.5L6 9L7.5 7.5ZM16.5 7.5L15 9L16.5 10.5L18 9L16.5 7.5ZM7.5 16.5L6 15L4.5 16.5L6 18L7.5 16.5ZM16.5 16.5L15 15L16.5 13.5L18 15L16.5 16.5Z"/>
+  </svg>
 )
 
 // State 1: Simple Tool Ecosystem
 function SimpleEcosystem() {
   return (
-    <div className="w-full max-w-[1100px]">
-      <div className="relative grid grid-cols-[320px_1fr_320px] gap-16 items-center">
+    <div className="w-full max-w-[1150px] mx-auto">
+      <div className="relative grid grid-cols-[340px_1fr_340px] gap-12 items-center">
         
         {/* Left Column */}
-        <div className="flex flex-col gap-4">
-          <h3 className="mb-2 text-[14px] font-bold uppercase tracking-[0.12em] text-blue-500">
+        <div className="flex flex-col gap-3.5">
+          <h3 className="mb-1 text-[13px] font-bold uppercase tracking-[0.15em] text-[#0EA5E9]">
             Clients & Models
           </h3>
-          <div className="rounded-xl bg-blue-50/50 border border-blue-200/30 px-4 py-3 text-[13px] font-medium text-slate-700">
+          <div className="rounded-[20px] bg-[#E0F2FE] border-2 border-[#7DD3FC] px-5 py-3 text-[14px] font-medium text-slate-700">
             CoCo & CoWork
           </div>
-          <div className="rounded-xl bg-slate-50 border border-slate-200/30 px-4 py-3 text-[13px] font-medium text-slate-600">
+          <div className="rounded-[20px] bg-white border-2 border-slate-200 px-5 py-3 text-[14px] font-medium text-slate-600">
             Claude · ChatGPT · Gemini
           </div>
-          <div className="rounded-xl bg-slate-50 border border-slate-200/30 px-4 py-3 text-[13px] font-medium text-slate-600">
+          <div className="rounded-[20px] bg-white border-2 border-slate-200 px-5 py-3 text-[14px] font-medium text-slate-600">
             Copilot · Cursor · IDEs
           </div>
-          <div className="rounded-xl bg-slate-50 border border-slate-200/30 px-4 py-3 text-[13px] font-medium text-slate-600">
+          <div className="rounded-[20px] bg-white border-2 border-slate-200 px-5 py-3 text-[14px] font-medium text-slate-600">
             Custom & autonomous agents
           </div>
         </div>
 
         {/* Center: Tools Box */}
-        <div className="flex items-center justify-center py-20">
-          <div className="rounded-2xl bg-blue-500 px-32 py-16 shadow-xl">
-            <p className="text-center text-[40px] font-bold text-white whitespace-nowrap">Tools</p>
+        <div className="flex items-center justify-center py-16">
+          <div className="rounded-[24px] bg-[#0284C7] px-28 py-14 shadow-xl">
+            <p className="text-center text-[44px] font-bold text-white whitespace-nowrap">Tools</p>
           </div>
         </div>
 
         {/* Right Column */}
-        <div className="flex flex-col gap-4">
-          <h3 className="mb-2 text-[14px] font-bold uppercase tracking-[0.12em] text-blue-500">
+        <div className="flex flex-col gap-3.5">
+          <h3 className="mb-1 text-[13px] font-bold uppercase tracking-[0.15em] text-[#0EA5E9]">
             Tools & Data
           </h3>
-          <div className="rounded-xl bg-blue-50/50 border border-blue-200/30 px-4 py-3 text-[13px] font-medium text-slate-700">
+          <div className="rounded-[20px] bg-[#E0F2FE] border-2 border-[#7DD3FC] px-5 py-3 text-[14px] font-medium text-slate-700">
             Snowflake data & apps
           </div>
-          <div className="rounded-xl bg-slate-50 border border-slate-200/30 px-4 py-3 text-[13px] font-medium text-slate-600">
+          <div className="rounded-[20px] bg-white border-2 border-slate-200 px-5 py-3 text-[14px] font-medium text-slate-600">
             SaaS applications
           </div>
-          <div className="rounded-xl bg-slate-50 border border-slate-200/30 px-4 py-3 text-[13px] font-medium text-slate-600">
+          <div className="rounded-[20px] bg-white border-2 border-slate-200 px-5 py-3 text-[14px] font-medium text-slate-600">
             Cloud & on-prem systems
           </div>
-          <div className="rounded-xl bg-slate-50 border border-slate-200/30 px-4 py-3 text-[13px] font-medium text-slate-600">
+          <div className="rounded-[20px] bg-white border-2 border-slate-200 px-5 py-3 text-[14px] font-medium text-slate-600">
             Custom & internal tools
           </div>
         </div>
 
-        {/* SVG Arrows - Dashed converging */}
+        {/* SVG Arrows - Dashed converging with solid arrowheads */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ overflow: 'visible' }}>
           <defs>
-            <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L9,3 z" fill="#10b981" />
+            <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto">
+              <path d="M0,0 L0,8 L10,4 z" fill="#059669" />
             </marker>
           </defs>
           
-          {/* Left arrows converging */}
-          <line x1="320" y1="68" x2="465" y2="180" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
-          <line x1="320" y1="119" x2="465" y2="180" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
-          <line x1="320" y1="170" x2="465" y2="180" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
-          <line x1="320" y1="221" x2="465" y2="180" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
+          {/* Left arrows converging to center */}
+          <line x1="340" y1="65" x2="490" y2="175" stroke="#059669" strokeWidth="3" strokeDasharray="8,5" markerEnd="url(#arrowhead)" />
+          <line x1="340" y1="115" x2="490" y2="175" stroke="#059669" strokeWidth="3" strokeDasharray="8,5" markerEnd="url(#arrowhead)" />
+          <line x1="340" y1="165" x2="490" y2="175" stroke="#059669" strokeWidth="3" strokeDasharray="8,5" markerEnd="url(#arrowhead)" />
+          <line x1="340" y1="215" x2="490" y2="175" stroke="#059669" strokeWidth="3" strokeDasharray="8,5" markerEnd="url(#arrowhead)" />
           
-          {/* Right arrows diverging */}
-          <line x1="547" y1="180" x2="692" y2="68" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
-          <line x1="547" y1="180" x2="692" y2="119" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
-          <line x1="547" y1="180" x2="692" y2="170" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
-          <line x1="547" y1="180" x2="692" y2="221" stroke="#10b981" strokeWidth="2.5" strokeDasharray="6,4" markerEnd="url(#arrowgreen)" />
+          {/* Right arrows diverging from center */}
+          <line x1="660" y1="175" x2="810" y2="65" stroke="#059669" strokeWidth="3" strokeDasharray="8,5" markerEnd="url(#arrowhead)" />
+          <line x1="660" y1="175" x2="810" y2="115" stroke="#059669" strokeWidth="3" strokeDasharray="8,5" markerEnd="url(#arrowhead)" />
+          <line x1="660" y1="175" x2="810" y2="165" stroke="#059669" strokeWidth="3" strokeDasharray="8,5" markerEnd="url(#arrowhead)" />
+          <line x1="660" y1="175" x2="810" y2="215" stroke="#059669" strokeWidth="3" strokeDasharray="8,5" markerEnd="url(#arrowhead)" />
         </svg>
       </div>
 
       {/* Bottom text */}
-      <div className="mt-10 space-y-4 text-center">
-        <p className="text-[13px] text-slate-500 font-medium">
+      <div className="mt-12 space-y-5 text-center">
+        <p className="text-[14px] text-slate-500 font-medium">
           policy · identity · audit on every tool call
         </p>
-        <p className="text-[15px] text-slate-600">
-          <span className="font-semibold text-blue-600">Frictionless</span> with Snowflake clients · <span className="font-semibold text-blue-600">Neutral</span> across everything else
+        <p className="text-[16px] text-slate-600">
+          <span className="font-bold text-[#0EA5E9]">Frictionless</span> with Snowflake clients · <span className="font-bold text-[#0EA5E9]">Neutral</span> across everything else
         </p>
       </div>
     </div>
   )
 }
 
-// State 2: Full AI Gateway Architecture
+// State 2: Cortex AI Gateway with 4 columns
 function AIGateway() {
+  const columns = [
+    {
+      icon: '🧠',
+      title: 'MODEL\nOPTIMIZATION',
+      items: [
+        { icon: '⤢', label: 'Intelligent Routing' },
+        { icon: '🕐', label: 'Latency' },
+        { icon: '🎯', label: 'Accuracy' },
+      ]
+    },
+    {
+      icon: '💵',
+      title: 'COST\nGOVERNANCE',
+      items: [
+        { icon: '📊', label: 'Cost Tracking' },
+        { icon: '💰', label: 'Budget Management' },
+        { icon: '📈', label: 'Telemetry' },
+      ]
+    },
+    {
+      icon: '🔒',
+      title: 'SECURITY',
+      items: [
+        { icon: '👤', label: 'Access Control' },
+        { icon: '✓', label: 'Policy Guardrails' },
+        { icon: '🔐', label: 'Data Protection' },
+      ]
+    },
+    {
+      icon: '👁',
+      title: 'OBSERVABILITY',
+      items: [
+        { icon: '📡', label: 'Real-time Monitoring' },
+        { icon: '⚡', label: 'Performance Metrics' },
+        { icon: '⚠', label: 'Anomaly Detection' },
+      ]
+    }
+  ]
+
   return (
-    <div className="w-full max-w-[980px] rounded-2xl border border-emerald-200/50 bg-white/40 p-4">
-      <p className="mb-3 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-sf-teal">
-        Cortex AI Gateway &mdash; Control and Govern Agents, Models and MCPs
-      </p>
-      <div className="space-y-2.5">
-        {ROWS.map((r) => (
-          <div key={r.label} className="flex items-center rounded-xl border border-sf-line px-4 py-3" style={{ background: r.tint }}>
-            <span className="w-52 shrink-0 text-[14px] font-semibold" style={{ color: r.color }}>{r.label}</span>
-            <div className="flex flex-1 flex-wrap items-center justify-end gap-2">
-              {r.items.map((it) => (
-                r.kind === 'logo' ? (
-                  <div key={it} className="flex flex-col items-center gap-1">
-                    <span className="grid h-9 w-9 place-items-center rounded-lg border border-sf-line bg-white p-1.5"><Logo name={it} /></span>
-                    <span className="text-[9px] text-sf-mist">{it}</span>
-                  </div>
-                ) : (
-                  <span key={it} className="rounded-full border border-sf-line bg-white px-3 py-1 text-[12px] text-sf-slate">{it}</span>
-                )
-              ))}
-            </div>
+    <div className="w-full max-w-[1200px] mx-auto">
+      <div className="flex items-center gap-4 mb-8">
+        <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-md">
+          <div className="w-10 h-10 text-[#0EA5E9]">
+            <SnowflakeLogo />
           </div>
-        ))}
+        </div>
+        <div className="flex-1 bg-white/60 rounded-[28px] border-2 border-blue-200/40 px-8 py-6 backdrop-blur-sm">
+          <div className="grid grid-cols-4 gap-6">
+            {columns.map((col, idx) => (
+              <div key={idx} className="flex flex-col gap-3">
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="text-[24px]">{col.icon}</div>
+                  <div className="text-[11px] font-bold leading-tight whitespace-pre-line text-slate-800">
+                    {col.title}
+                  </div>
+                </div>
+                {col.items.map((item, i) => (
+                  <div key={i} className="flex items-center gap-2.5 bg-white rounded-xl border border-slate-200 px-3 py-2.5 shadow-sm">
+                    <span className="text-[16px]">{item.icon}</span>
+                    <span className="text-[13px] font-medium text-slate-700">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-      <p className="mt-3 flex items-center justify-center gap-2 text-[12px] font-semibold uppercase tracking-[0.2em] text-sf-blue">
-        <span className="inline-block h-4 w-4"><SnowflakeLogo /></span> Snowflake
-      </p>
+
+      {/* Mountain decoration at bottom */}
+      <div className="relative h-24 -mx-12 mt-8">
+        <svg viewBox="0 0 1400 120" className="absolute bottom-0 left-0 w-full" preserveAspectRatio="none">
+          <path d="M0,60 L200,80 L400,40 L600,90 L800,30 L1000,70 L1200,50 L1400,80 L1400,120 L0,120 Z" 
+            fill="#BAE6FD" opacity="0.3"/>
+          <path d="M0,80 L300,60 L500,90 L700,50 L900,85 L1100,45 L1400,75 L1400,120 L0,120 Z" 
+            fill="#7DD3FC" opacity="0.4"/>
+          <path d="M0,90 L250,70 L450,95 L650,65 L850,88 L1050,58 L1250,82 L1400,70 L1400,120 L0,120 Z" 
+            fill="#0EA5E9" opacity="0.5"/>
+          <path d="M0,100 L200,85 L400,105 L600,80 L800,98 L1000,75 L1200,95 L1400,85 L1400,120 L0,120 Z" 
+            fill="#0284C7" opacity="0.6"/>
+        </svg>
+      </div>
+
+      {/* Bottom branding */}
+      <div className="flex items-center gap-3 mt-4">
+        <div className="w-8 h-8 text-[#0EA5E9]">
+          <SnowflakeLogo />
+        </div>
+        <span className="text-[13px] font-medium text-[#0EA5E9]">snowflake</span>
+        <span className="text-[11px] text-slate-400 ml-4">© 2026 Snowflake Inc. All Rights Reserved.</span>
+      </div>
     </div>
   )
 }
@@ -149,7 +205,6 @@ export default function Slide05bTools() {
           e.stopImmediatePropagation()
           advance()
         }
-        // On last step: fall through so App.jsx advances main slide
       }
     }
     window.addEventListener('keydown', onKey, { capture: true })
@@ -157,11 +212,7 @@ export default function Slide05bTools() {
   }, [step, advance])
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 p-12">
-      <h2 className="mb-8 text-[42px] font-extrabold tracking-tight text-sf-navy">
-        {step === 0 ? 'Agent Tool Ecosystem' : 'Cortex AI Gateway'}
-      </h2>
-      
+    <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 p-12">
       <AnimatePresence mode="wait">
         {step === 0 ? (
           <motion.div
@@ -170,6 +221,7 @@ export default function Slide05bTools() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
+            className="w-full"
           >
             <SimpleEcosystem />
           </motion.div>
@@ -180,7 +232,12 @@ export default function Slide05bTools() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
+            className="w-full"
           >
+            <div className="text-center mb-8">
+              <h1 className="text-[52px] font-bold text-[#0F172A] mb-2">Cortex AI Gateway</h1>
+              <p className="text-[24px] font-medium text-[#0EA5E9]">Control and Govern Agents, Models and MCPs.</p>
+            </div>
             <AIGateway />
           </motion.div>
         )}
