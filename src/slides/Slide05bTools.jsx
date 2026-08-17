@@ -106,7 +106,7 @@ function ToolEcosystem() {
             </defs>
             
             {/* Left converging arrows */}
-            {[60, 105, 150, 195].map((y, i) => (
+            {[50, 95, 140, 185].map((y, i) => (
               <motion.line
                 key={`left-${i}`}
                 x1="300" y1={y} x2="450" y2="165"
@@ -121,7 +121,7 @@ function ToolEcosystem() {
             ))}
             
             {/* Right diverging arrows */}
-            {[60, 105, 150, 195].map((y, i) => (
+            {[50, 95, 140, 185].map((y, i) => (
               <motion.line
                 key={`right-${i}`}
                 x1="650" y1="165" x2="800" y2={y}
