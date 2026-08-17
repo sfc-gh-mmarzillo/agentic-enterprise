@@ -52,14 +52,14 @@ export default function Slide11cComparison() {
   ]
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-start bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 px-16 py-10 overflow-y-auto">
+    <div className="flex h-full w-full flex-col items-center justify-start bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 px-12 py-6 overflow-y-auto">
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-6 text-center"
+        className="mb-4 text-center"
       >
-        <h1 className="text-[42px] font-black text-slate-900 mb-1">Key Differences: CoCo and Claude Code</h1>
-        <p className="text-[16px] text-slate-600 font-medium">
+        <h1 className="text-[36px] font-black text-slate-900 mb-1">Key Differences: CoCo and Claude Code</h1>
+        <p className="text-[14px] text-slate-600 font-medium">
           A direct comparison of CoCo to Claude Code across AI coding capabilities
         </p>
       </motion.div>
@@ -68,16 +68,16 @@ export default function Slide11cComparison() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="w-full max-w-[1150px]"
+        className="w-full max-w-[1150px] mb-6"
       >
         <table className="w-full border-collapse bg-white/80 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg">
           <thead>
             <tr>
-              <th className="bg-slate-100 border-b-2 border-slate-300 px-5 py-4 text-left w-[200px]"></th>
-              <th className="bg-blue-500 border-b-2 border-blue-600 px-5 py-4 text-left text-white font-bold text-[16px]">
+              <th className="bg-slate-100 border-b-2 border-slate-300 px-4 py-3 text-left w-[180px]"></th>
+              <th className="bg-blue-500 border-b-2 border-blue-600 px-4 py-3 text-left text-white font-bold text-[14px]">
                 Snowflake CoCo
               </th>
-              <th className="bg-orange-500 border-b-2 border-orange-600 px-5 py-4 text-left text-white font-bold text-[16px]">
+              <th className="bg-orange-500 border-b-2 border-orange-600 px-4 py-3 text-left text-white font-bold text-[14px]">
                 Claude Code
               </th>
             </tr>
@@ -85,10 +85,10 @@ export default function Slide11cComparison() {
           <tbody>
             {rows.map((row, idx) => (
               <tr key={idx} className="border-b border-slate-200 hover:bg-blue-50/30 transition-colors">
-                <td className="bg-slate-50 px-5 py-4 font-bold text-[13px] text-slate-800 align-top">
+                <td className="bg-slate-50 px-4 py-2.5 font-bold text-[11.5px] text-slate-800 align-top">
                   {row.category}
                 </td>
-                <td className="px-5 py-4 text-[12.5px] text-slate-700 leading-relaxed align-top">
+                <td className="px-4 py-2.5 text-[11px] text-slate-700 leading-snug align-top">
                   {row.coco}
                   {row.cocoLink && (
                     <>
@@ -99,7 +99,7 @@ export default function Slide11cComparison() {
                     </>
                   )}
                 </td>
-                <td className="px-5 py-4 text-[12.5px] text-slate-700 leading-relaxed align-top">
+                <td className="px-4 py-2.5 text-[11px] text-slate-700 leading-snug align-top">
                   {row.claude}
                   {row.claudeLink && (
                     <>
