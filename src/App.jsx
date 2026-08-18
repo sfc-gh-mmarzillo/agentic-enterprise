@@ -19,6 +19,7 @@ import Slide07AgentsAct from './slides/Slide07AgentsAct'
 import Slide11aCoCoVsClaude from './slides/Slide11aCoCoVsClaude'
 import Slide11bTokenomics from './slides/Slide11bTokenomics'
 import Slide11cComparison from './slides/Slide11cComparison'
+import Slide11dAgentIntelligence from './slides/Slide11dAgentIntelligence'
 import Slide08AgentsBuild from './slides/Slide08AgentsBuild'
 import Slide09Meaning from './slides/Slide09Meaning'
 import Slide10Proof from './slides/Slide10Proof'
@@ -46,15 +47,16 @@ const SLIDES = [
   Slide11aCoCoVsClaude,   // 12 CoCo vs Claude Code
   Slide11bTokenomics,     // 13 Better Tokenomics
   Slide11cComparison,     // 14 Key Differences
-  Slide08AgentsBuild,     // 15 Agents that Build
-  Slide09Meaning,         // 16 Meaning
-  Slide10Proof,           // 17 Why Snowflake is Differentiated
-  Slide10Secure,          // 18 Secure by Design
-  Slide12FinOps,          // 19 FinOps
-  Slide11Models,          // 20 Model Flexibility
-  Slide13OnePlatform,     // 21 One Platform
-  Slide14CTA,             // 22 Call to Action
-  SlideBreakNextSteps,    // 23 Break: Next Steps & Q&A
+  Slide11dAgentIntelligence, // 15 Agent Intelligence Layer
+  Slide08AgentsBuild,     // 16 Agents that Build
+  Slide09Meaning,         // 17 Meaning
+  Slide10Proof,           // 18 Why Snowflake is Differentiated
+  Slide10Secure,          // 19 Secure by Design
+  Slide12FinOps,          // 20 FinOps
+  Slide11Models,          // 21 Model Flexibility
+  Slide13OnePlatform,     // 22 One Platform
+  Slide14CTA,             // 23 Call to Action
+  SlideBreakNextSteps,    // 24 Break: Next Steps & Q&A
 ]
 
 const TITLES = [
@@ -62,7 +64,7 @@ const TITLES = [
   'Raven at Scale', 'AI Gateway', 'Agent Tool Ecosystem', 'Assembled Not Unified',
   'Release Highlights', 'Customers',
   'Agents that Act', 'CoCo vs Claude Code', 'Better Tokenomics', 'Key Differences',
-  'Agents that Build', 'Meaning',
+  'Agent Intelligence Layer', 'Agents that Build', 'Meaning',
   'Why Snowflake is Differentiated', 'Secure by Design', 'FinOps',
   'Model Flexibility', 'One Platform', 'Call to Action',
   'Break: Next Steps & Q&A',
@@ -84,6 +86,7 @@ const NOTES = [
   'Direct comparison: CoCo vs Claude Code on productivity, context, and costs.',
   'Tokenomics advantage: CoCo completes tasks in fewer steps with lower costs.',
   'Detailed feature comparison table across 9 dimensions.',
+  'Agent intelligence layer: circular flow from run → logs → dashboards → govern.',
   'Show how teams build and deploy agents quickly on Snowflake.',
   'Tie the capabilities back to business meaning and value.',
   'Why Snowflake is differentiated — accuracy, efficiency, and speed benchmarks.',
@@ -105,7 +108,7 @@ export default function App() {
   const [[index, dir], setState] = useState([0, 0])
   const [dark, setDark] = useState(false)
   const [panel, setPanel] = useState(null) // 'notes' | 'slides' | null
-  const [hidden, setHidden] = useState(() => new Set([0, 8, 9, 10, 23])) // Quote, Assembled, Releases, Customers, and Break hidden by default
+  const [hidden, setHidden] = useState(() => new Set([0, 8, 9, 10, 24])) // Quote, Assembled, Releases, Customers, and Break hidden by default
   const [slideOrder, setSlideOrder] = useState(() => SLIDES.map((_, i) => i))
   const [draggedItem, setDraggedItem] = useState(null)
   const total = SLIDES.length
