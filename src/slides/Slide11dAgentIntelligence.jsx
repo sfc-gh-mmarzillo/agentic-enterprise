@@ -41,11 +41,6 @@ export default function Slide11dAgentIntelligence() {
             {/* Background circle guide */}
             <svg className="absolute inset-0 w-full h-full" viewBox="0 0 750 380" style={{ overflow: 'visible' }}>
               <defs>
-                {/* Arrow marker */}
-                <marker id="arrow-clean" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                  <path d="M0,0 L0,6 L9,3 z" fill="#38bdf8" />
-                </marker>
-                
                 {/* Gradient for arrow */}
                 <linearGradient id="arrow-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stopColor="#38bdf8" />
@@ -53,7 +48,7 @@ export default function Slide11dAgentIntelligence() {
                 </linearGradient>
               </defs>
 
-              {/* Circular arrow path - smooth and clean */}
+              {/* Circular path - smooth and clean, no arrowhead */}
               <motion.path
                 d="M 520 100 
                    C 620 100, 680 160, 680 260
@@ -66,7 +61,6 @@ export default function Slide11dAgentIntelligence() {
                 stroke="url(#arrow-gradient)"
                 strokeWidth="20"
                 strokeLinecap="round"
-                markerEnd="url(#arrow-clean)"
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={{ pathLength: 1, opacity: 1 }}
                 transition={{ duration: 2, delay: 0.6, ease: "easeInOut" }}
@@ -75,12 +69,12 @@ export default function Slide11dAgentIntelligence() {
 
             {/* Circular boxes positioned around the flow */}
             
-            {/* Top: Agents Run */}
+            {/* Top: Agents Run - moved down to fit in circle */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.9, type: "spring" }}
-              className="absolute top-0 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#2C5F7C] to-[#3d7a9c] rounded-2xl px-14 py-4 shadow-xl border-2 border-white/20"
+              className="absolute top-[50px] left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#2C5F7C] to-[#3d7a9c] rounded-2xl px-14 py-4 shadow-xl border-2 border-white/20"
             >
               <p className="text-[24px] font-bold text-white whitespace-nowrap">Agents Run</p>
             </motion.div>
