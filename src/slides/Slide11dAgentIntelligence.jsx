@@ -2,111 +2,130 @@ import { motion } from 'framer-motion'
 
 export default function Slide11dAgentIntelligence() {
   return (
-    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 px-12 py-8">
-      <div className="w-full max-w-[1200px] relative">
-        {/* Top left box */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-          className="absolute top-0 left-0 w-[380px] bg-white border-2 border-blue-400 rounded-lg p-6 shadow-lg"
-        >
-          <p className="text-[17px] text-center leading-tight">
-            Cortex AI Gateway<br/>enables the <span className="font-bold">agent intelligence<br/>layer</span>
-          </p>
-        </motion.div>
+    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 px-16 py-12">
+      <div className="w-full max-w-[1150px] relative">
+        
+        {/* Top boxes */}
+        <div className="flex justify-between items-start mb-16">
+          {/* Left box */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="w-[450px] bg-white/90 backdrop-blur-sm border-2 border-blue-400 rounded-2xl px-8 py-6 shadow-lg"
+          >
+            <p className="text-[18px] text-center leading-relaxed text-slate-800">
+              Cortex AI Gateway<br/>
+              enables the <span className="font-bold text-blue-600">agent intelligence<br/>layer</span>
+            </p>
+          </motion.div>
 
-        {/* Top right box */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-          className="absolute top-0 right-0 w-[380px] bg-white border-2 border-blue-400 rounded-lg p-6 shadow-lg"
-        >
-          <p className="text-[17px] text-center leading-tight">
-            Snowflake is already the trusted<br/><span className="font-bold">enterprise data & context<br/>layer</span> for AI
-          </p>
-        </motion.div>
+          {/* Right box */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="w-[450px] bg-white/90 backdrop-blur-sm border-2 border-blue-400 rounded-2xl px-8 py-6 shadow-lg"
+          >
+            <p className="text-[18px] text-center leading-relaxed text-slate-800">
+              Snowflake is already the trusted<br/>
+              <span className="font-bold text-blue-600">enterprise data & context<br/>layer</span> for AI
+            </p>
+          </motion.div>
+        </div>
 
-        {/* Center circular flow */}
-        <div className="flex items-center justify-center mt-32">
-          <div className="relative w-[700px] h-[420px]">
-            {/* SVG Circle with arrows */}
-            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 700 420">
+        {/* Center circular flow diagram */}
+        <div className="flex items-center justify-center">
+          <div className="relative w-[750px] h-[380px]">
+            
+            {/* Background circle guide */}
+            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 750 380" style={{ overflow: 'visible' }}>
               <defs>
-                <marker id="arrowhead-flow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto">
-                  <path d="M0,0 L0,8 L10,4 z" fill="#38bdf8" />
+                {/* Arrow marker */}
+                <marker id="arrow-clean" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L9,3 z" fill="#38bdf8" />
                 </marker>
+                
+                {/* Gradient for arrow */}
+                <linearGradient id="arrow-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#38bdf8" />
+                  <stop offset="100%" stopColor="#0ea5e9" />
+                </linearGradient>
               </defs>
-              
-              {/* Circular arrow path */}
+
+              {/* Circular arrow path - smooth and clean */}
               <motion.path
-                d="M 450 80 A 180 180 0 0 1 600 210 M 600 210 A 180 180 0 0 1 350 360 M 350 360 A 180 180 0 0 1 100 210 M 100 210 A 180 180 0 0 1 250 80"
+                d="M 520 100 
+                   C 620 100, 680 160, 680 260
+                   C 680 340, 640 370, 560 370
+                   C 480 370, 375 370, 375 370
+                   C 375 370, 270 370, 190 370
+                   C 110 370, 70 340, 70 260
+                   C 70 160, 130 100, 230 100"
                 fill="none"
-                stroke="#38bdf8"
-                strokeWidth="16"
-                markerEnd="url(#arrowhead-flow)"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 2, delay: 0.5 }}
+                stroke="url(#arrow-gradient)"
+                strokeWidth="20"
+                strokeLinecap="round"
+                markerEnd="url(#arrow-clean)"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 1 }}
+                transition={{ duration: 2, delay: 0.6, ease: "easeInOut" }}
               />
             </svg>
 
-            {/* Top box - Agents Run */}
+            {/* Circular boxes positioned around the flow */}
+            
+            {/* Top: Agents Run */}
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-              className="absolute top-0 left-1/2 -translate-x-1/2 bg-[#2C5F7C] rounded-2xl px-16 py-4 shadow-xl"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.9, type: "spring" }}
+              className="absolute top-0 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#2C5F7C] to-[#3d7a9c] rounded-2xl px-14 py-4 shadow-xl border-2 border-white/20"
             >
-              <p className="text-[22px] font-bold text-white text-center whitespace-nowrap">Agents Run</p>
+              <p className="text-[24px] font-bold text-white whitespace-nowrap">Agents Run</p>
             </motion.div>
 
-            {/* Right box - Logs Stored */}
+            {/* Right: Logs Stored */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1 }}
-              className="absolute right-0 top-1/2 -translate-y-1/2 bg-[#2C5F7C] rounded-2xl px-10 py-4 shadow-xl"
+              transition={{ delay: 1.1 }}
+              className="absolute right-0 top-[45%] -translate-y-1/2 bg-gradient-to-r from-[#2C5F7C] to-[#3d7a9c] rounded-2xl px-10 py-4 shadow-xl border-2 border-white/20"
             >
-              <p className="text-[20px] font-bold text-white text-center whitespace-nowrap">Logs Stored in Snowflake</p>
+              <p className="text-[20px] font-bold text-white whitespace-nowrap">
+                Logs Stored in<br/>Snowflake
+              </p>
             </motion.div>
 
-            {/* Bottom box - Performance Dashboards */}
+            {/* Bottom: Performance & Recommendations */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2 }}
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-[#2C5F7C] rounded-2xl px-8 py-4 shadow-xl"
+              transition={{ delay: 1.3 }}
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#2C5F7C] to-[#3d7a9c] rounded-2xl px-8 py-4 shadow-xl border-2 border-white/20"
             >
-              <p className="text-[19px] font-bold text-white text-center leading-snug">
+              <p className="text-[18px] font-bold text-white text-center leading-snug">
                 Agent Performance Dashboards<br/>
                 CoCo Recommends Optimizations
               </p>
             </motion.div>
 
-            {/* Left box - Govern Better */}
+            {/* Left: Govern & Build */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.4 }}
-              className="absolute left-0 top-1/2 -translate-y-1/2 bg-[#2C5F7C] rounded-2xl px-10 py-4 shadow-xl"
+              transition={{ delay: 1.5 }}
+              className="absolute left-0 top-[45%] -translate-y-1/2 bg-gradient-to-r from-[#2C5F7C] to-[#3d7a9c] rounded-2xl px-10 py-4 shadow-xl border-2 border-white/20"
             >
               <p className="text-[20px] font-bold text-white text-center leading-snug">
                 Govern Better.<br/>
                 Build Smarter.
               </p>
             </motion.div>
+
           </div>
         </div>
 
-        {/* Bottom mountain decoration */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 overflow-hidden">
-          <svg viewBox="0 0 1400 60" className="w-full h-full" preserveAspectRatio="none">
-            <path d="M0,30 Q350,10 700,30 T1400,30 L1400,60 L0,60 Z" fill="#e0f2fe" opacity="0.3"/>
-            <path d="M0,40 Q350,25 700,40 T1400,40 L1400,60 L0,60 Z" fill="#7dd3fc" opacity="0.4"/>
-          </svg>
-        </div>
       </div>
     </div>
   )
